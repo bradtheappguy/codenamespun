@@ -1,0 +1,272 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FC2A0A3B141C1362006433D6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2A0A3A141C1362006433D6 /* UIKit.framework */; };
+		FC2A0A3D141C1362006433D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2A0A3C141C1362006433D6 /* Foundation.framework */; };
+		FC2A0A3F141C1362006433D6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2A0A3E141C1362006433D6 /* CoreGraphics.framework */; };
+		FC2A0A45141C1362006433D6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC2A0A43141C1362006433D6 /* InfoPlist.strings */; };
+		FC2A0A48141C1362006433D6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2A0A47141C1362006433D6 /* main.m */; };
+		FC2A0A4B141C1362006433D6 /* CodenameSpunAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2A0A4A141C1362006433D6 /* CodenameSpunAppDelegate.m */; };
+		FC2A0A4E141C1362006433D6 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC2A0A4C141C1362006433D6 /* MainWindow.xib */; };
+		FC3953EC141C1A9400E3F161 /* web in Resources */ = {isa = PBXBuildFile; fileRef = FC3953EB141C1A9400E3F161 /* web */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FC2A0A36141C1362006433D6 /* CodenameSpun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodenameSpun.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC2A0A3A141C1362006433D6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FC2A0A3C141C1362006433D6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FC2A0A3E141C1362006433D6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		FC2A0A42141C1362006433D6 /* CodenameSpun-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CodenameSpun-Info.plist"; sourceTree = "<group>"; };
+		FC2A0A44141C1362006433D6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FC2A0A46141C1362006433D6 /* CodenameSpun-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CodenameSpun-Prefix.pch"; sourceTree = "<group>"; };
+		FC2A0A47141C1362006433D6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FC2A0A49141C1362006433D6 /* CodenameSpunAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CodenameSpunAppDelegate.h; sourceTree = "<group>"; };
+		FC2A0A4A141C1362006433D6 /* CodenameSpunAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CodenameSpunAppDelegate.m; sourceTree = "<group>"; };
+		FC2A0A4D141C1362006433D6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		FC3953EB141C1A9400E3F161 /* web */ = {isa = PBXFileReference; lastKnownFileType = folder; name = web; path = ../../web; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FC2A0A33141C1362006433D6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC2A0A3B141C1362006433D6 /* UIKit.framework in Frameworks */,
+				FC2A0A3D141C1362006433D6 /* Foundation.framework in Frameworks */,
+				FC2A0A3F141C1362006433D6 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FC2A0A2B141C1362006433D6 = {
+			isa = PBXGroup;
+			children = (
+				FC3953EB141C1A9400E3F161 /* web */,
+				FC2A0A40141C1362006433D6 /* CodenameSpun */,
+				FC2A0A39141C1362006433D6 /* Frameworks */,
+				FC2A0A37141C1362006433D6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FC2A0A37141C1362006433D6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FC2A0A36141C1362006433D6 /* CodenameSpun.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FC2A0A39141C1362006433D6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC2A0A3A141C1362006433D6 /* UIKit.framework */,
+				FC2A0A3C141C1362006433D6 /* Foundation.framework */,
+				FC2A0A3E141C1362006433D6 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FC2A0A40141C1362006433D6 /* CodenameSpun */ = {
+			isa = PBXGroup;
+			children = (
+				FC2A0A49141C1362006433D6 /* CodenameSpunAppDelegate.h */,
+				FC2A0A4A141C1362006433D6 /* CodenameSpunAppDelegate.m */,
+				FC2A0A4C141C1362006433D6 /* MainWindow.xib */,
+				FC2A0A41141C1362006433D6 /* Supporting Files */,
+			);
+			path = CodenameSpun;
+			sourceTree = "<group>";
+		};
+		FC2A0A41141C1362006433D6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FC2A0A42141C1362006433D6 /* CodenameSpun-Info.plist */,
+				FC2A0A43141C1362006433D6 /* InfoPlist.strings */,
+				FC2A0A46141C1362006433D6 /* CodenameSpun-Prefix.pch */,
+				FC2A0A47141C1362006433D6 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FC2A0A35141C1362006433D6 /* CodenameSpun */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FC2A0A57141C1362006433D6 /* Build configuration list for PBXNativeTarget "CodenameSpun" */;
+			buildPhases = (
+				FC2A0A32141C1362006433D6 /* Sources */,
+				FC2A0A33141C1362006433D6 /* Frameworks */,
+				FC2A0A34141C1362006433D6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CodenameSpun;
+			productName = CodenameSpun;
+			productReference = FC2A0A36141C1362006433D6 /* CodenameSpun.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FC2A0A2D141C1362006433D6 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = FC2A0A30141C1362006433D6 /* Build configuration list for PBXProject "CodenameSpun" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FC2A0A2B141C1362006433D6;
+			productRefGroup = FC2A0A37141C1362006433D6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FC2A0A35141C1362006433D6 /* CodenameSpun */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FC2A0A34141C1362006433D6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC2A0A45141C1362006433D6 /* InfoPlist.strings in Resources */,
+				FC2A0A4E141C1362006433D6 /* MainWindow.xib in Resources */,
+				FC3953EC141C1A9400E3F161 /* web in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FC2A0A32141C1362006433D6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC2A0A48141C1362006433D6 /* main.m in Sources */,
+				FC2A0A4B141C1362006433D6 /* CodenameSpunAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FC2A0A43141C1362006433D6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC2A0A44141C1362006433D6 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		FC2A0A4C141C1362006433D6 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC2A0A4D141C1362006433D6 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FC2A0A55141C1362006433D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		FC2A0A56141C1362006433D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		FC2A0A58141C1362006433D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CodenameSpun/CodenameSpun-Prefix.pch";
+				INFOPLIST_FILE = "CodenameSpun/CodenameSpun-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		FC2A0A59141C1362006433D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CodenameSpun/CodenameSpun-Prefix.pch";
+				INFOPLIST_FILE = "CodenameSpun/CodenameSpun-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FC2A0A30141C1362006433D6 /* Build configuration list for PBXProject "CodenameSpun" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC2A0A55141C1362006433D6 /* Debug */,
+				FC2A0A56141C1362006433D6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FC2A0A57141C1362006433D6 /* Build configuration list for PBXNativeTarget "CodenameSpun" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC2A0A58141C1362006433D6 /* Debug */,
+				FC2A0A59141C1362006433D6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FC2A0A2D141C1362006433D6 /* Project object */;
+}

@@ -1,0 +1,49 @@
+/* Device is positioned vertically*/
+@media all and (orientation:portrait) {
+    
+}
+
+/* Device is positioned horizontally*/
+@media all and (orientation:landscape) {
+    
+}
+
+/* High pixel ratio backgrounds (i.e iPhone 4 retina display) */
+@media only screen and (-webkit-min-device-pixel-ratio : 1.5) {
+   selector {
+       /* An image twice as big as the original */
+       background-image: url(imageX2.png);
+       /* Resize the image to the original's dimensions */
+       background-size: 100px 50px;
+    }
+}
+
+A.btn-back {
+    background:#ffffff;
+    color:#000000;
+    text-decoration:none;
+    position:absolute;
+    height:22px;
+    line-height:22px;
+    text-align:center;
+    width:42px;
+    border:1px solid #000000;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+}   
+    A.btn-back:before {
+        background:#ffffff;
+        border:solid #000000;
+        border-width:0 0 1px 1px;
+        -webkit-transform: rotate(45deg) skew(10deg, 10deg);
+        -moz-transform: rotate(45deg) skew(10deg, 10deg);
+        -o-transform: rotate(45deg) skew(10deg, 10deg);
+        transform: rotate(45deg) skew(10deg, 10deg);
+        width:11px;
+        height:11px;
+        position:absolute;
+        left:-7px;
+        top:5px;
+        content:"";
+    }
