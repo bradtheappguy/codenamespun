@@ -76,13 +76,13 @@
 }
 
 -(BOOL)webView:(UIWebView *)theWebView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-  NSLog(@"wtf load? %@", [request URL]);
+  NSLog(@"webView %@", [request URL]);
 	return YES;
 }
 
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-  NSLog(@"FAIL!!!!!! %@", error);
+  NSLog(@"webView failed %@", error);
 }
 
 

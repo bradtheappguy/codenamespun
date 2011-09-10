@@ -15,6 +15,19 @@
 		FC2A0A4B141C1362006433D6 /* CodenameSpunAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2A0A4A141C1362006433D6 /* CodenameSpunAppDelegate.m */; };
 		FC2A0A4E141C1362006433D6 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC2A0A4C141C1362006433D6 /* MainWindow.xib */; };
 		FC3953EC141C1A9400E3F161 /* web in Resources */ = {isa = PBXBuildFile; fileRef = FC3953EB141C1A9400E3F161 /* web */; };
+		FC395405141C228C00E3F161 /* libspotify.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC395404141C228C00E3F161 /* libspotify.a */; };
+		FC39540C141C258B00E3F161 /* appkey.c in Sources */ = {isa = PBXBuildFile; fileRef = FC395407141C258A00E3F161 /* appkey.c */; };
+		FC39540D141C258B00E3F161 /* audio.c in Sources */ = {isa = PBXBuildFile; fileRef = FC395408141C258A00E3F161 /* audio.c */; };
+		FC39540E141C258B00E3F161 /* osx-audio.c in Sources */ = {isa = PBXBuildFile; fileRef = FC39540A141C258A00E3F161 /* osx-audio.c */; };
+		FC395415141C266900E3F161 /* SpotifyPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = FC395410141C266900E3F161 /* SpotifyPlaylist.m */; };
+		FC395416141C266900E3F161 /* SpotifySession.m in Sources */ = {isa = PBXBuildFile; fileRef = FC395412141C266900E3F161 /* SpotifySession.m */; };
+		FC395417141C266900E3F161 /* SpotifyTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = FC395414141C266900E3F161 /* SpotifyTrack.m */; };
+		FC39541F141C271D00E3F161 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC39541E141C271D00E3F161 /* CoreAudio.framework */; };
+		FC395421141C272200E3F161 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC395420141C272200E3F161 /* CFNetwork.framework */; };
+		FC395423141C274E00E3F161 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC395422141C274E00E3F161 /* AudioToolbox.framework */; };
+		FC395425141C275600E3F161 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC395424141C275600E3F161 /* AVFoundation.framework */; };
+		FC395427141C276800E3F161 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC395426141C276800E3F161 /* SystemConfiguration.framework */; };
+		FC395429141C286800E3F161 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FC395428141C286800E3F161 /* libstdc++.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +43,25 @@
 		FC2A0A4A141C1362006433D6 /* CodenameSpunAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CodenameSpunAppDelegate.m; sourceTree = "<group>"; };
 		FC2A0A4D141C1362006433D6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		FC3953EB141C1A9400E3F161 /* web */ = {isa = PBXFileReference; lastKnownFileType = folder; name = web; path = ../../web; sourceTree = "<group>"; };
+		FC395404141C228C00E3F161 /* libspotify.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libspotify.a; sourceTree = "<group>"; };
+		FC395406141C258A00E3F161 /* api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = api.h; sourceTree = "<group>"; };
+		FC395407141C258A00E3F161 /* appkey.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = appkey.c; sourceTree = "<group>"; };
+		FC395408141C258A00E3F161 /* audio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = audio.c; sourceTree = "<group>"; };
+		FC395409141C258A00E3F161 /* audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = audio.h; sourceTree = "<group>"; };
+		FC39540A141C258A00E3F161 /* osx-audio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "osx-audio.c"; sourceTree = "<group>"; };
+		FC39540B141C258A00E3F161 /* queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = queue.h; sourceTree = "<group>"; };
+		FC39540F141C266900E3F161 /* SpotifyPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotifyPlaylist.h; sourceTree = "<group>"; };
+		FC395410141C266900E3F161 /* SpotifyPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotifyPlaylist.m; sourceTree = "<group>"; };
+		FC395411141C266900E3F161 /* SpotifySession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotifySession.h; sourceTree = "<group>"; };
+		FC395412141C266900E3F161 /* SpotifySession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotifySession.m; sourceTree = "<group>"; };
+		FC395413141C266900E3F161 /* SpotifyTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotifyTrack.h; sourceTree = "<group>"; };
+		FC395414141C266900E3F161 /* SpotifyTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotifyTrack.m; sourceTree = "<group>"; };
+		FC39541E141C271D00E3F161 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		FC395420141C272200E3F161 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		FC395422141C274E00E3F161 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		FC395424141C275600E3F161 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		FC395426141C276800E3F161 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		FC395428141C286800E3F161 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/gcc/arm-apple-darwin10/4.0.1/libstdc++.dylib"; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,9 +69,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC395429141C286800E3F161 /* libstdc++.dylib in Frameworks */,
+				FC395427141C276800E3F161 /* SystemConfiguration.framework in Frameworks */,
+				FC395425141C275600E3F161 /* AVFoundation.framework in Frameworks */,
+				FC395423141C274E00E3F161 /* AudioToolbox.framework in Frameworks */,
+				FC395421141C272200E3F161 /* CFNetwork.framework in Frameworks */,
+				FC39541F141C271D00E3F161 /* CoreAudio.framework in Frameworks */,
 				FC2A0A3B141C1362006433D6 /* UIKit.framework in Frameworks */,
 				FC2A0A3D141C1362006433D6 /* Foundation.framework in Frameworks */,
 				FC2A0A3F141C1362006433D6 /* CoreGraphics.framework in Frameworks */,
+				FC395405141C228C00E3F161 /* libspotify.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +106,12 @@
 		FC2A0A39141C1362006433D6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC395428141C286800E3F161 /* libstdc++.dylib */,
+				FC395426141C276800E3F161 /* SystemConfiguration.framework */,
+				FC395424141C275600E3F161 /* AVFoundation.framework */,
+				FC395422141C274E00E3F161 /* AudioToolbox.framework */,
+				FC395420141C272200E3F161 /* CFNetwork.framework */,
+				FC39541E141C271D00E3F161 /* CoreAudio.framework */,
 				FC2A0A3A141C1362006433D6 /* UIKit.framework */,
 				FC2A0A3C141C1362006433D6 /* Foundation.framework */,
 				FC2A0A3E141C1362006433D6 /* CoreGraphics.framework */,
@@ -77,6 +122,7 @@
 		FC2A0A40141C1362006433D6 /* CodenameSpun */ = {
 			isa = PBXGroup;
 			children = (
+				FC395403141C228C00E3F161 /* libspotify */,
 				FC2A0A49141C1362006433D6 /* CodenameSpunAppDelegate.h */,
 				FC2A0A4A141C1362006433D6 /* CodenameSpunAppDelegate.m */,
 				FC2A0A4C141C1362006433D6 /* MainWindow.xib */,
@@ -94,6 +140,26 @@
 				FC2A0A47141C1362006433D6 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FC395403141C228C00E3F161 /* libspotify */ = {
+			isa = PBXGroup;
+			children = (
+				FC39540F141C266900E3F161 /* SpotifyPlaylist.h */,
+				FC395410141C266900E3F161 /* SpotifyPlaylist.m */,
+				FC395411141C266900E3F161 /* SpotifySession.h */,
+				FC395412141C266900E3F161 /* SpotifySession.m */,
+				FC395413141C266900E3F161 /* SpotifyTrack.h */,
+				FC395414141C266900E3F161 /* SpotifyTrack.m */,
+				FC395406141C258A00E3F161 /* api.h */,
+				FC395407141C258A00E3F161 /* appkey.c */,
+				FC395408141C258A00E3F161 /* audio.c */,
+				FC395409141C258A00E3F161 /* audio.h */,
+				FC39540A141C258A00E3F161 /* osx-audio.c */,
+				FC39540B141C258A00E3F161 /* queue.h */,
+				FC395404141C228C00E3F161 /* libspotify.a */,
+			);
+			path = libspotify;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,6 +224,12 @@
 			files = (
 				FC2A0A48141C1362006433D6 /* main.m in Sources */,
 				FC2A0A4B141C1362006433D6 /* CodenameSpunAppDelegate.m in Sources */,
+				FC39540C141C258B00E3F161 /* appkey.c in Sources */,
+				FC39540D141C258B00E3F161 /* audio.c in Sources */,
+				FC39540E141C258B00E3F161 /* osx-audio.c in Sources */,
+				FC395415141C266900E3F161 /* SpotifyPlaylist.m in Sources */,
+				FC395416141C266900E3F161 /* SpotifySession.m in Sources */,
+				FC395417141C266900E3F161 /* SpotifyTrack.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,9 +295,16 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CodenameSpun/CodenameSpun-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/CodenameSpun";
 				INFOPLIST_FILE = "CodenameSpun/CodenameSpun-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/CodenameSpun/libspotify\"",
+					"\"$(SDKROOT)/usr/lib/gcc/arm-apple-darwin10/4.0.1\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = armv6;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -237,10 +316,17 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CodenameSpun/CodenameSpun-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/CodenameSpun";
 				INFOPLIST_FILE = "CodenameSpun/CodenameSpun-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/CodenameSpun/libspotify\"",
+					"\"$(SDKROOT)/usr/lib/gcc/arm-apple-darwin10/4.0.1\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = armv6;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
