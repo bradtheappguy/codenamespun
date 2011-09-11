@@ -41,6 +41,10 @@ $(document).ready(function () {
   });               
 });
 
+function updateLocation(position) {
+  alert(position.coords.latitude + " " + position.coords.longitude);
+}
+
 function didSubmitSearch(search_form) {
   search_form.term.blur();
   bridge(search_form);
