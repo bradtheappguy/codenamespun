@@ -15,17 +15,16 @@
   audio_fifo_t audiofifo;
   NSMutableDictionary *globalPlaylists;
   NSMutableDictionary *globalTracks;
+  NSMutableDictionary *globalBrowsers;
   BOOL didFetchPlaylists;
 }
 
 
 @property (nonatomic, retain) NSMutableDictionary *globalPlaylists;
 @property (nonatomic, retain) NSMutableDictionary *globalTracks;
+@property (nonatomic, retain) NSMutableDictionary *globalBrowsers;
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UIWebView *viewController;
-
-
--(void)addPlaylistToGlobalPlaylists:(SPPlaylist *)thePlaylist;
 
 
 @end
