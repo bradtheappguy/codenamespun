@@ -26,7 +26,7 @@ function postPlayedSong(name) {
             temp = data['current_observation']['temp_f'];
             $.post('http://spunapi.herokuapp.com/songs', 
                    { 'song[name]': name, 
-                     'song[user_id]': '1',
+                     'song[username]': 'bradsmithinc',
                      'user[weather]': weather + ' ' + temp
                    }, function() { alert(name); } );
             }
@@ -68,7 +68,7 @@ function updateProfile(userID)  {
   $.getJSON('http://spunapi.herokuapp.com/users/'+userID+'/songs.json', function(data) {
             $.each(data, function(key, val) {
                    var li = "<li>";
-                   li += '<a class="thumbnail" href="#" onclick="pushToProfile(' +val['id']+ ');"><img src="' +val['avatar'] + '"></a>';
+                  
                    li += '<span class="notification">' + val['name'] + '</span>';
                    li += '<a class="add-btn">Add</a>';
                    li += '<a class="play-btn">Play</a>';
