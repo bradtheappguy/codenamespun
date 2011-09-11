@@ -171,10 +171,13 @@ static const NSMutableDictionary *globalPlaylists;
       }
     }
     
-    NSError *error = NULL;
-    NSData *jsonData = [[CJSONSerializer serializer] serializeObject:[globalPlaylists allKeys] error:&error];
-    NSLog(@"wtf: %@ %@", error, [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
-    
+    /*
+    if (globalPlaylists) {
+      NSError *error = NULL;
+      NSData *jsonData = [[CJSONSerializer serializer] serializeObject:[globalPlaylists allKeys] error:&error];
+      NSLog(@"wtf: %@ %@", error, [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
+    }
+    */
   }
 }
 
