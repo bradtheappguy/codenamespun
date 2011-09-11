@@ -58,16 +58,15 @@
         </div>
         <div class="touchyjs-content" id="activity">
             <div>                
-                <div class='title-bar'>Activity</div>
+                
                 <ul class='table-view activity-feed'>
 					<li>
-						<img src="[IMG]" class="" />
+						<img src="[IMG]" class="thumbnail" />
 						<span class="notification">[MSG]</span>
-						<a>Add</a>
-						<a>Play</a>
+						<a class='add-btn'>Add</a>
+						<a class='play-btn'>Play</a>
 					</li>
                 </ul>
-                <br><br><br><br><br><br><br>
             </div>
         </div>
    
@@ -89,8 +88,14 @@
         </div>
 		<div class="touchyjs-content" id="discover-list-view">
             <div>
-				<div id='tab-view'>
-					<div id='tab-artists'>
+				<br/><br/>
+				<div class='tab-view'>
+					<div class="tab-view-buttons">
+						<a href="#" onclick='activateTab("#tab-artists"); return false;'>Artists</a>
+						<a href="#" onclick='activateTab("#tab-albums"); return false;'>Albums</a>
+						<a href="#" onclick='activateTab("#tab-tracks"); return false;'>Tracks</a>
+					</div>
+					<div id='tab-artists' class='active tab'>
 	               	 	<ul class='table-view artist-list'>
 							<li onclick="TouchyJS.Nav.goTo('discover-list-view-album'); return false;">
 								<img src="[IMG]" class="" />
@@ -99,7 +104,7 @@
 							</li>
 		                </ul>
 					</div>
-					<div id='tab-albums'>
+					<div id='tab-albums' class='tab'>
 	               	 	<ul class='table-view album-list'>
 							<li onclick="TouchyJS.Nav.goTo('discover-list-view-track'); return false;">
 								<img src="[IMG]" class="" />
@@ -109,7 +114,7 @@
 							</li>
 		                </ul>
 					</div>
-					<div id='tab-tracks'>
+					<div id='tab-tracks' class='tab'>
 	               	 	<ul class='table-view track-list'>
 							<li>
 							
@@ -121,9 +126,9 @@
 					</div>
 				</div>
                 <br>
-                <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
                 
-                <br><br><br><br><br><br><br>
+                
+              
             </div>
         </div>
 		<div class="touchyjs-content" id="discover-list-view-artist">
@@ -138,7 +143,7 @@
 
                 <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
                 
-                <br><br><br><br><br><br><br>
+                
             </div>
         </div>
 		<div class="touchyjs-content" id="discover-list-view-album">
@@ -154,7 +159,7 @@
 
                 <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
                 
-                <br><br><br><br><br><br><br>
+              
             </div>
         </div>
 		<div class="touchyjs-content" id="discover-list-view-track">
@@ -170,7 +175,7 @@
 
                 <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
                 
-                <br><br><br><br><br><br><br>
+              
             </div>
         </div>
 		
@@ -194,7 +199,7 @@
 					<br>
                 <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
                 
-                <br><br><br><br><br><br><br>
+             
             </div>
         </div>
 		<div class="touchyjs-content" id="mymusic">
@@ -203,7 +208,7 @@
                 <br>
                 <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
                 
-                <br><br><br><br><br><br><br>
+               
             </div>
         </div>
         <div class="touchyjs-footer">
