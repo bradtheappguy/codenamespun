@@ -35,13 +35,27 @@ function getWeather() {
 /*
   Load the initial page on app launch
 */
+
+function pushToProfile(userID) {
+  alert(userID);
+  TouchyJS.Nav.goTo('profile');
+  $.getJSON('http://spunapi.herokuapp.com/users/'+userID, function(data) {
+            name = data['name'];
+            avatar = data['avatar']
+            genre = data['genre']
+            weather = data['weather']
+            status = data['status']
+           
+            });  
+  return false;
+}
+
 $(document).ready(function () {
-                  postPlayedSong('riging hood');
   $.getJSON('http://spunapi.herokuapp.com/feed.json', function(data) {
             var items = [];
             $.each(data, function(key, val) {                  
                    var li = "<li>";;
-                   li += '<img src="' + val['avatar'] + '">';
+                   li += '<a href="#" onclick="pushToProfile(' +val['id']+ ');"><img src="' + val['avatar'] + '"></a>';
                    li += '<span class="notification">' + val['status'] + '</span>';
                    li += '<a>Add</a>';
                    li += '<a>Play</a>';
