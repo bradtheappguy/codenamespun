@@ -173,6 +173,8 @@
         NSError *err = nil;
 
         NSLog(@"playlist!!!!!!!!!! %@ %@", first, track);
+        
+        [[SPSession sharedSession] seekPlaybackToOffset:0];
         [[SPSession sharedSession] playTrack:track error:&err];
         NSLog(@"error??? %@", err);
       }
