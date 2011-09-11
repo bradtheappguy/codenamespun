@@ -42,7 +42,7 @@ function pushToProfile(userID) {
   $('.user-info .location').replaceWith('<span class="location"></span>');
   
   TouchyJS.Nav.goTo('profile');
-  $.getJSON('http://spunapi.herokuapp.com/users/'+userID, function(data) {
+  $.getJSON('http://spunapi.herokuapp.com/users/'+userID+'.json', function(data) {
             name = data['name'];
             avatar = data['avatar']
             genre = data['genre']
@@ -53,12 +53,15 @@ function pushToProfile(userID) {
             $('.user-info .location').replaceWith('<span class="location">'+weather+'</span>');
   });
   
-  $.getJSON('http://spunapi.herokuapp.com/users/'+userID+'/badges', function(data) {
+  $.getJSON('http://spunapi.herokuapp.com/users/'+userID+'/badges.json', function(data) {
             $.each(data, function(key, val) {
-                   alert(val['name']+val['image']);
+                   alert(val['image']);
+                   badge = '<div class="user-badge"><img src="'+ val['image'] +'" class="badge-img"/>'+val['name']+'</div>';
+                   $('#profile .user-badges').append(badge);
                    });
   });
   
+
   $.getJSON('http://spunapi.herokuapp.com/users/'+userID+'/songs.json', function(data) {
             $.each(data, function(key, val) {
                    var li = "<li>";
