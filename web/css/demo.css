@@ -11,13 +11,22 @@ body {
     padding: 10px;
 }
 .touchyjs-footer{
-    background: #1B5790;
-    color: white;
-    height: 56px;
+   	background:transparent url(../images/tn-bg.png) 0 0 repeat-x;
+    height: 45px;
     line-height: 30px;
 	position:absolute;
 	bottom:0;
 	width:100%;
+	margin:0;
+	
+}
+
+.touchyjs-footer .tab-navigator a{
+	display:inline-block;
+	width:103px;
+	text-align:center;
+	color:#fff;
+	text-decoration:none;
 }
 h1, h1 a{
     color: #ffffff !important;
