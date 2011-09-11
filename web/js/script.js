@@ -12,3 +12,14 @@ function hideFromTop(target) {
 		top:'-100%'
 	}, 200);
 }
+
+$(document).ready(function () {
+  $.getJSON('http://spunapi.herokuapp.com/feed.json', function(data) {
+            var items = [];
+            $.each(data, function(key, val) {
+                   $.each(val, function(key, val) {
+                          alert(key + val);
+                   });
+            });
+  });               
+});
