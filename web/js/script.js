@@ -45,7 +45,6 @@ function pushToProfile(userID) {
             genre = data['genre']
             weather = data['weather']
             status = data['status']
-           
             });  
   return false;
 }
@@ -55,10 +54,10 @@ $(document).ready(function () {
             var items = [];
             $.each(data, function(key, val) {                  
                    var li = "<li>";;
-                   li += '<a href="#" onclick="pushToProfile(' +val['id']+ ');"><img src="' + val['avatar'] + '"></a>';
+                   li += '<a class="thumbnail" href="#" onclick="pushToProfile(' +val['id']+ ');"><img src="' + val['avatar'] + '"></a>';
                    li += '<span class="notification">' + val['status'] + '</span>';
-                   li += '<a>Add</a>';
-                   li += '<a>Play</a>';
+                   li += '<a class="add-button">Add</a>';
+                   li += '<a class="play-button">Play</a>';
                    li += "</li>";
                    $('#activity .table-view').append(li)
             });
