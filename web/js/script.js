@@ -33,11 +33,18 @@ function postPlayedSong(name) {
     );
 }
 
+
+
+
 function pushToProfile(userID) {
   $('.user-info .user-name').replaceWith('<span class="user-name"></span>');
   $('.user-info .location').replaceWith('<span class="location"></span>');
   
   TouchyJS.Nav.goTo('profile');
+  updateProfile(userID);
+}
+
+function updateProfile(userID)  {
   $.getJSON('http://spunapi.herokuapp.com/users/'+userID+'.json', function(data) {
             name = data['name'];
             avatar = data['avatar']
@@ -51,7 +58,7 @@ function pushToProfile(userID) {
   
   $.getJSON('http://spunapi.herokuapp.com/users/'+userID+'/badges.json', function(data) {
             $.each(data, function(key, val) {
-                   alert(val['image']);
+                   //alert(val['image']);
                    badge = '<div class="user-badge"><img src="'+ val['image'] +'" class="badge-img"/>'+val['name']+'</div>';
                    $('#profile .user-badges').append(badge);
                    });
