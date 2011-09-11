@@ -26,7 +26,7 @@ function postPlayedSong(name) {
             temp = data['current_observation']['temp_f'];
             $.post('http://spunapi.herokuapp.com/songs', 
                    { 'song[name]': name, 
-                     'song[user_id]': '1',
+                     'song[username]': 'bradsmithinc',
                      'user[weather]': weather + ' ' + temp
                    }, function() { alert(name); } );
             }
