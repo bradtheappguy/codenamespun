@@ -20,7 +20,7 @@
             // TouchyJs configuration: http://labs.doat.com/touchyjs/#configuration
             var touchyjsConfig = {
                 'fixedPositioning': true, // default
-                'browserHistory': false, // default
+                'browserHistory': true, // default
             };
         </script>
         
@@ -40,7 +40,7 @@
 
 
       <div class="touchyjs-header">
-		<div id="titlebar"></div>
+		<div id="titlebar"> </div>
         <div id="music-player">
           <form id="player-form" action="brige://player/">
             <input type="hidden" name="track" value=""/>
@@ -78,6 +78,8 @@
 						<a class='play-btn'>Play</a>
 					</li-->
                 </ul>
+				<div class='bottom-spacer'></div>
+
             </div>
         </div>
    
@@ -90,10 +92,10 @@
 					<a href="" onclick="TouchyJS.Nav.goTo('discover-list-view'); return false;">Recommend</a>
 					<a href="" onclick="TouchyJS.Nav.goTo('discover-list-view'); return false;">Weather</a>
 				</div>
-                <br>
-                <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
+                <div class='bottom-spacer'></div>
+				
+               
                 
-                <br><br><br><br><br><br><br>
             </div>
         </div>
 		<div class="touchyjs-content" id="discover-list-view">
@@ -112,6 +114,8 @@
 								<span class="artist-name">[ARTIST]</span>
 								
 							</a>
+							
+			                <a href="" onclick="TouchyJS.Nav.back(); return false;" class='back-btn cell'>Go back</a>
 		                </div>
 					</div>
 					<div id='tab-albums' class='tab'>
@@ -122,6 +126,8 @@
 								<span class="artist-name">by [ARTIST]</span>
 						
 							</a>
+							
+			                <a href="" onclick="TouchyJS.Nav.back(); return false;" class='back-btn cell'>Go back</a>
 		                </div>
 					</div>
 					<div id='tab-tracks' class='tab'>
@@ -132,11 +138,13 @@
 								<span class="artist-name">[ARTIST] - [ALBUM]</span>
 					
 							</a>
+							
+			                <a href="" onclick="TouchyJS.Nav.back(); return false;" class='back-btn cell'>Go back</a>
 		                </div>
 					</div>
 				</div>
-                <br>
-                
+                <div class='bottom-spacer'></div>
+				
                 
               
             </div>
@@ -149,9 +157,11 @@
 						<span class="artist-name">[ARTIST]</span>
 						
 					</a>
+					
+	                <a href="" class='cell' onclick="TouchyJS.Nav.back(); return false;" class='back-btn cell'>Go back</a>
                 </div>
-
-                <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
+				<div class='bottom-spacer'></div>
+				
                 
                 
             </div>
@@ -165,10 +175,12 @@
 						<span class="artist-name">by [ARTIST]</span>
 				
 					</a>
+					<a href="" class='cell' onclick="TouchyJS.Nav.back(); return false;" class='back-btn'>Go back</a>
                 </div>
 
-                <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
-                
+                <a href="" onclick="TouchyJS.Nav.back(); return false;" class='back-btn cell'>Go back</a>
+                <div class='bottom-spacer'></div>
+				
               
             </div>
         </div>
@@ -181,9 +193,11 @@
 						<span class="artist-name">[ARTIST] - [ALBUM]</span>
 			
 					</a>
+					<a href="" class='cell' onclick="TouchyJS.Nav.back(); return false;" class='back-btn cell'>Go back</a>
                 </div>
-
-                <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
+				<div class='bottom-spacer'></div>
+				
+               
                 
               
             </div>
@@ -194,10 +208,16 @@
                 <div class='avatar-img'>
                 	<img src="[AVATAR]" />
                 </div>
+				<div class='weather-img'>
+                	<img src="[WEATHER]" />
+                </div>
 				<div class='user-info'>
                 	<span class='user-name'>[USER NAME]</span>
 					<span class='location'>[LOCATION]</span>
 				</div>
+				<div class="user-badges">
+                	<div class="user-badge"><img src="" class='badge-img' />Badge Title</div>
+                </div>
 				<ul class='table-view activity-feed'>
 					<!--li>
 						<img src="[IMG]" class="" />
@@ -206,8 +226,8 @@
 						<a>Play</a>
 					</li-->
                 </ul>
-					<br>
-                <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
+				<div class='bottom-spacer'></div>
+                
                 
              
             </div>
@@ -216,7 +236,7 @@
             <div>
                 My Music
                 <br>
-                <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
+                <a href="" onclick="TouchyJS.Nav.back(); return false;" >Go back</a>
                 
                
             </div>
@@ -225,25 +245,14 @@
             <div class='tab-navigator'>
 				<a href="" onclick="TouchyJS.Nav.goTo('activity', {transition:'none'}); return false;" class='active activity'><span class='icon'></span><span class='title'>Activity</span</a>
 				<a href="" onclick="TouchyJS.Nav.goTo('discover', {transition:'none'}); return false;" class='discover'><span class='icon'></span><span class='title'>Discover</span></a>
-				<a href="" onclick="TouchyJS.Nav.goTo('profile', {transition:'none'}); return false;" class='profile'><span class='icon'></span><span class='title'>Profile</span></a>
+				<a href="" onclick="TouchyJS.Nav.goTo('profile', {transition:'none'}); updateProfile(1); return false;" class='profile'><span class='icon'></span><span class='title'>Profile</span></a>
 			</div>
         </div>
 		
         <script>
-            if(!isTouch) {
-                document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>');
-            } else {
-                document.write('<script src="http://developer.stg.doat.com/min/g=zepto.0.7&debug"><\/script>');
-            }
+          document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>');
         </script>        
         <script src="js/libs/touchy.min.js"></script>      
         <script src="js/script.js"></script>
-
-        <!-- Change UA-XXXXX-X to be your site's ID -->
-        <script>
-            window._gaq = [['_setAccount', 'UAXXXXXXXX1'], ['_trackPageview'], ['_trackPageLoadTime']];
-            document.write('<script src="' + ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js"><\/script>');
-
-        </script>
     </body>
 </html>

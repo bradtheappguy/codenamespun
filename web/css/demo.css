@@ -168,7 +168,7 @@ body {
 	color:#333;
 	text-decoration:none;
 	width:100%;
-	display:block;
+	position:relative;
 }
 .activity-feed li {
 	margin:0;
@@ -266,12 +266,36 @@ h1, h1 a{
     margin: 0;
     text-align: center;
 }
-.btn-back{
-    left: 17px;
-    top: 10px; 
-    display: none;
+.back-btn{
+    position:absolute;
+	background:#fff;
+	top:0;
+	left:0;
+	display:none;
 }
-A.btn-back {
+.back-btn.active {
+	display:block;
+}
+
+
+
+
+.user-badges {
+	height:80px;
+	overflow:scroll;
+}
+.user-badges .user-badge {
+	display:block;
+	float:left;
+	text-align:center;
+}
+.user-badges .user-badge img {
+	display:block;
+	width:55px;
+	height:55px;
+	margin-bottom:3px;
+}
+/*A.btn-back {
     background:#ffffff;
     color:#000000;
     text-decoration:none;
@@ -300,10 +324,23 @@ A.btn-back {
         top:5px;
         content:"";
     }
+*/
 
+
+.bottom-spacer {
+	display:block;
+	height:60px;
+}
+.btn-back {
+	position:absolute;
+	top:0;
+	left:0;
+}
 .touchyjs-content{
     background: #666;
 	color:#fff;
+	margin-bottom:200px;
+	
 }
 .touchyjs-custom-view{
     background: white;
