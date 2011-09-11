@@ -37,25 +37,30 @@
         <style type="text/css"> .touchyjs-content { display: none; } </style>
     </head>
     <body>
-        <div class="touchyjs-header">
-            <div id="music-player">
-				<div id="album cover"><img src="[IMG]" /></div>
-				<div id="song info">
-					<span class='song-title'>
-						[SONG TITLE]
-					</span>
-					<span class='song-artist-album'>
-						[ARTIST] - [ALBUM]
-					</span>
-					<div id="player-controls">
-						<a href="#" id='previous-song'>Previous</a>
-						<a href="#" id="play-pause">Play</a>
-						<a href="#" id='next-song'>Next</a>
-					</div>
-				</div>
-			</div>
-			player goes here. <a href='' onclick="TouchyJS.Nav.goTo('mymusic'); return false;">Find a song</a>
+
+
+      <div class="touchyjs-header">
+        <div id="music-player">
+          <form id="player-form" action="brige://player/">
+            <input type="hidden" name="track" value=""/>
+            <input type="hidden" name="playlist" value=""/>
+            <div id="album cover">
+            </div>
+            <div id="song-info">
+              <span id="song-title">
+              </span>
+              <br/>
+              <span id="song-playlist">
+              </span>
+              <div id="player-controls">
+              </div>
+            </div>
+            <input type="submit" name="event" value="play"/>
+          </form>
         </div>
+      </div>
+
+
         <div class="touchyjs-content" id="activity">
             <div>                
                 <div class='title-bar'>Activity</div>

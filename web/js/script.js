@@ -24,7 +24,7 @@ function postPlayedSong(name) {
                    { 'song[name]': name, 
                      'song[user_id]': '1',
                      'user[weather]': weather + ' ' + temp
-                   });
+                   }, function() { } );
             }
     );
 }
@@ -62,6 +62,7 @@ $(document).ready(function () {
                    $('#activity .table-view').append(li)
             });
   });               
+
 });
 
 
@@ -76,31 +77,36 @@ function updateLocation(position) {
   alert(position.coords.latitude + " " + position.coords.longitude);
 }
 
-
 function didSubmitSearch(search_form) {
   search_form.term.blur();
   bridge(search_form);
 }
 
-function didFetchPlaylists(itunes_playlists, spotify_playlists) {
-  $.each(spotify_playlists, function(key, value) {
-    alert(key);
-    $(value).each(function(index, name) {
-      alert(name);
+function didFetchPlaylists(spotify_playlists) {
+  var did_populate_first_song = false;
+  $("#player-form").submit(function() {
+    bridge(this);
+    postPlayedSong($("#player-form input[name='track']").val());
+    return false;
+  });
+  $.each(spotify_playlists, function(playlist, value) {
+    $(value).each(function(index, track) {
+      if (!did_populate_first_song) {
+        did_populate_first_song = true;
+        populatePlayerForm(playlist, track);
+        $("#player-form input[type='submit']").click();
+      }
     });
   });
 }
 
-function didFetchSearchResults(songs) {
-  if (search_callback) {
-    search_callback(songs);
-  }
+function populatePlayerForm(playlist, track) {
+  $("#player-form #song-title").text(track);
+  $("#player-form #song-playlist").text(playlist);
+  $("#player-form input[name='track']").val(track);
+  $("#player-form input[name='playlist']").val(playlist);
 }
 
 function bridge(form) {
-  iframe = document.createElement("IFRAME");
-  iframe.setAttribute("src", form.action + $(form).serialize());
-  document.body.appendChild(iframe); 
-  iframe.parentNode.removeChild(iframe);
-  iframe = null;
+  window.location = form.action + $(form).serialize();
 }
