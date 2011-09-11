@@ -649,7 +649,6 @@ static SPSession *sharedSession;
 
 -(sp_connectionstate)connectionState {
     if (session != NULL) {
-      NSLog(@"wtf: %d", sp_session_connectionstate(session));
         return sp_session_connectionstate(session);
     } else {
         return SP_CONNECTION_STATE_UNDEFINED;
