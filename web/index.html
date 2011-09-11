@@ -38,7 +38,23 @@
     </head>
     <body>
         <div class="touchyjs-header">
-            player goes here. <a href='' onclick="TouchyJS.Nav.goTo('mymusic'); return false;">Find a song</a>
+            <div id="music-player">
+				<div id="album cover"><img src="[IMG]" /></div>
+				<div id="song info">
+					<span class='song-title'>
+						[SONG TITLE]
+					</span>
+					<span class='song-artist-album'>
+						[ARTIST] - [ALBUM]
+					</span>
+					<div id="player-controls">
+						<a href="#" id='previous-song'>Previous</a>
+						<a href="#" id="play-pause">Play</a>
+						<a href="#" id='next-song'>Next</a>
+					</div>
+				</div>
+			</div>
+			player goes here. <a href='' onclick="TouchyJS.Nav.goTo('mymusic'); return false;">Find a song</a>
         </div>
         <div class="touchyjs-content" id="activity">
             <div>                
@@ -50,13 +66,6 @@
 						<a>Add</a>
 						<a>Play</a>
 					</li>
-
-          <li>
-            <form action="bridge://search/" onsubmit="javascript:return(didSubmitSearch(this));">
-              <input type="text" name="term" value="marley"/>
-            </form>
-          </li>
-
                 </ul>
                 <br><br><br><br><br><br><br>
             </div>
@@ -199,9 +208,9 @@
         </div>
         <div class="touchyjs-footer">
             <div class='tab-navigator'>
-				<a href="" onclick="TouchyJS.Nav.goTo('activity'); return false;">Activity</a>
-				<a href="" onclick="TouchyJS.Nav.goTo('discover'); return false;">Discover</a>
-				<a href="" onclick="TouchyJS.Nav.goTo('profile'); return false;">Profile</a>
+				<a href="" onclick="TouchyJS.Nav.goTo('activity', {transition:'none'}); return false;" class='active activity'><span class='icon'></span><span class='title'>Activity</span</a>
+				<a href="" onclick="TouchyJS.Nav.goTo('discover', {transition:'none'}); return false;" class='discover'><span class='icon'></span><span class='title'>Discover</span></a>
+				<a href="" onclick="TouchyJS.Nav.goTo('profile', {transition:'none'}); return false;" class='profile'><span class='icon'></span><span class='title'>Profile</span></a>
 			</div>
         </div>
 		
