@@ -44,14 +44,19 @@
             <div>                
                 <div class='title-bar'>Activity</div>
                 <ul class='table-view activity-feed'>
-					
-          <!--li>
+					<li>
 						<img src="[IMG]" class="" />
 						<span class="notification">[MSG]</span>
 						<a>Add</a>
 						<a>Play</a>
-					</li-->
-                  
+					</li>
+
+          <li>
+            <form action="bridge://search/" onsubmit="javascript:return(didSubmitSearch(this));">
+              <input type="text" name="term" value="marley"/>
+            </form>
+          </li>
+
                 </ul>
                 <br><br><br><br><br><br><br>
             </div>
