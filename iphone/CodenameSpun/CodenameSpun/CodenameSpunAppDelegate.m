@@ -9,21 +9,17 @@
 #import "CodenameSpunAppDelegate.h"
 #import "libspotify/SPSession.h"
 #import <AVFoundation/AVFoundation.h>
-
+#import "TouchJSON/JSON/CJSONSerializer.h"
 #include "libspotify/appkey.c"
-
-
 
 
 @implementation CodenameSpunAppDelegate
 
-//@synthesize session = _session;
 
-//@synthesize playlist = _playlist;
-
+@synthesize globalPlaylists;
 @synthesize window=_window;
-
 @synthesize viewController=_viewController;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -39,75 +35,24 @@
 	BOOL success = YES;
 	success &= [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&err];
 	success &= [[AVAudioSession sharedInstance] setActive:YES error:&err];
-	if(!success)
+	if(!success) {
 		NSLog(@"Failed to activate audio session: %@", err);
+  }
 	
   
-  
+  [self setGlobalPlaylists:[NSMutableDictionary dictionaryWithCapacity:0]];
   audio_init(&audiofifo);
-  
-  
   [SPSession initializeSharedSessionWithApplicationKey:[NSData dataWithBytes:&g_appkey length:g_appkey_size]
                                              userAgent:@"com.spotify.SimplePlayer"
                                                  error:&err];
-  
   [[SPSession sharedSession] setDelegate:self];
   [[SPSession sharedSession] setPlaybackDelegate:self];
   [[SPSession sharedSession] attemptLoginWithUserName:@"diclophis" password:@"qwerty123" rememberCredentials:NO];
-  
-
-  NSLog(@"spotify session error: %@", err);
-
-  
-  
-	NSLog(@"Finished launching");
-  
-  
-  //[_session loginUser:@"diclophis" password:@"qwerty123"];
-
   
   [self.window makeKeyAndVisible];
   return YES;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-  /*
-   Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-   Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-   */
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-  /*
-   Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-   If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-   */
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-  /*
-   Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-   */
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-  /*
-   Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-   */
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-  /*
-   Called when the application is about to terminate.
-   Save data if appropriate.
-   See also applicationDidEnterBackground:.
-   */
-}
 
 - (void)dealloc
 {
@@ -116,8 +61,9 @@
     [super dealloc];
 }
 
+
 -(BOOL)webView:(UIWebView *)theWebView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-  NSLog(@"webView %@", [request URL]);
+  //NSLog(@"webView %@", [request URL]);
   if ([[[request URL] scheme] isEqualToString:@"file"]) {
     return YES;
   } else {
@@ -128,8 +74,9 @@
 
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-  NSLog(@"webView failed %@", error);
+  //NSLog(@"webView failed %@", error);
 }
+
 
 - (void)beginInterruption {
 }
@@ -140,34 +87,73 @@
 
 
 -(void)sessionDidLoginSuccessfully:(SPSession *)aSession {
-  NSLog(@"sessionDidLoginSuccessfully %@", [aSession user]);
+  //NSLog(@"sessionDidLoginSuccessfully %@", [aSession user]);
 }
 
 
 -(void)session:(SPSession *)aSession didFailToLoginWithError:(NSError *)error {
-  NSLog(@"WTF!!!!!!!!!!!!!!!!");
+  //NSLog(@"WTF!!!!!!!!!!!!!!!!");
 }
 
 
 -(void)session:(SPSession *)aSession didLogMessage:(NSString *)aMessage{
-  NSLog(@"session: %@, message: %@", aSession, aMessage);
+  //NSLog(@"session: %@, message: %@", aSession, aMessage);
+}
+
+
+-(void)addPlaylistToGlobalPlaylists:(SPPlaylist *)thePlaylist {
+  if ([globalPlaylists objectForKey:[thePlaylist name]]) {
+  } else {
+    SPPlaylistContainer *playlists = [[SPSession sharedSession] userPlaylists];
+    [globalPlaylists setObject:thePlaylist forKey:[thePlaylist name]];
+    NSInteger g_count = [globalPlaylists count];
+    NSInteger l_count = [[playlists playlists] count] - 1;
+    if (g_count == l_count) {
+      NSError *error = NULL;
+      NSData *jsonData = [[CJSONSerializer serializer] serializeObject:[globalPlaylists allKeys] error:&error];
+      NSString *jsonPlaylists = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+      NSString *didLoadPlaylistsCallback = [NSString stringWithFormat:@"javascript:didFetchPlaylists([], %@);", jsonPlaylists];
+      NSLog(@"wtf: %@", didLoadPlaylistsCallback);
+      [self.viewController stringByEvaluatingJavaScriptFromString:didLoadPlaylistsCallback];
+    }
+  }
 }
 
 
 -(void)sessionDidChangeMetadata:(SPSession *)aSession {
   SPPlaylistContainer *playlists = [aSession userPlaylists];  
-  if ([playlists isLoaded]) {
-    SPPlaylist *first = [[playlists playlists] objectAtIndex:1];
-    if (first && [first isLoaded]) {
-      SPTrack *track = [[first tracks] objectAtIndex:0];
-      if (track && [track isLoaded]) {
-        NSError *err = nil;        
-        [[SPSession sharedSession] seekPlaybackToOffset:0];
-        [[SPSession sharedSession] playTrack:track error:&err];
+  if ([playlists isLoaded]) {    
+    for (id playlist_or_folder in [playlists playlists]) {
+      if ([playlist_or_folder isKindOfClass:[SPPlaylistFolder class]]) {
+        //NSLog(@"folder, wtf is afolder");
+      } else if ([playlist_or_folder isKindOfClass:[SPPlaylist class]]) {
+        if ([playlist_or_folder isLoaded]) {
+          //NSLog(@"list: %@", playlist_or_folder);
+          [self performSelectorOnMainThread:@selector(addPlaylistToGlobalPlaylists:) withObject:playlist_or_folder waitUntilDone:NO];
+        }
       }
     }
   }
 }
+
+
+/*
+ SPPlaylist *first = [[playlists playlists] objectAtIndex:1];
+ if (first && [first isLoaded]) {
+ SPTrack *track = [[first tracks] objectAtIndex:0];
+ if (track && [track isLoaded]) {
+ 
+ 
+ //NSError *err = nil;        
+ //[[SPSession sharedSession] seekPlaybackToOffset:0];
+ //[[SPSession sharedSession] playTrack:track error:&err];
+ 
+ 
+ 
+ 
+ }
+ }
+ */
 
 -(NSInteger)session:(SPSession *)aSession shouldDeliverAudioFrames:(const void *)audioFrames ofCount:(NSInteger)frameCount format:(const sp_audioformat *)audioFormat {
   audio_fifo_t *af = &audiofifo;
