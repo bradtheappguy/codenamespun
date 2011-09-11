@@ -276,6 +276,25 @@ h1, h1 a{
 .back-btn.active {
 	display:block;
 }
+
+
+
+
+.user-badges {
+	height:80px;
+	overflow:scroll;
+}
+.user-badges .user-badge {
+	display:block;
+	float:left;
+	text-align:center;
+}
+.user-badges .user-badge img {
+	display:block;
+	width:55px;
+	height:55px;
+	margin-bottom:3px;
+}
 /*A.btn-back {
     background:#ffffff;
     color:#000000;
@@ -307,6 +326,11 @@ h1, h1 a{
     }
 */
 
+
+.bottom-spacer {
+	display:block;
+	height:60px;
+}
 .btn-back {
 	position:absolute;
 	top:0;
