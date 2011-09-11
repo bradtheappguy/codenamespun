@@ -44,8 +44,8 @@
         <div id="music-player">
           <form id="player-form" action="brige://player/">
             <input type="hidden" name="track" value=""/>
-            <input type="hidden" name="playlist" value=""/>
-            <div id="album cover">
+            <div id="album-cover">
+              <img id="album-cover-img" src="#"/>
             </div>
             <div id="song-info">
               <span id="song-title">
@@ -57,12 +57,12 @@
               </div>
             </div>
             <input type="submit" name="event" value="play"/>
+            <div id="player-controls">
+              <a class='previous-song' href="#"></a>
+              <a class='play-pause' href="#"></a>
+              <a class='next-song' href="#"></a>
+            </div>
           </form>
-		  <div id="player-controls">
-			<a class='previous-song'></a>
-		  	<a class='play-pause'></a>
-			<a class='next-song'></a>
-		  </div>
         </div>
       </div>
 
@@ -302,7 +302,7 @@
             <div class='tab-navigator'>
 				<a href="" onclick="TouchyJS.Nav.goTo('activity', {transition:'none'}); return false;" class='active activity'><span class='icon'></span><span class='title'>Activity</span</a>
 				<a href="" onclick="TouchyJS.Nav.goTo('discover', {transition:'none'}); return false;" class='discover'><span class='icon'></span><span class='title'>Discover</span></a>
-				<a href="" onclick="TouchyJS.Nav.goTo('profile', {transition:'none'}); updateProfile(1); return false;" class='profile'><span class='icon'></span><span class='title'>Profile</span></a>
+				<a href="" onclick="clearProfile(); TouchyJS.Nav.goTo('profile', {transition:'none'}); updateProfile(1); return false;" class='profile'><span class='icon'></span><span class='title'>Profile</span></a>
 			</div>
         </div>
 		

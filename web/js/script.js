@@ -4,6 +4,7 @@ var global_playlists = null;
 var search_callback = null;
 var current_playlist = null;
 var current_track = null;
+var tracks = new Array();
 var playlists = null;
 
 function revealFromTop(target) {
@@ -20,15 +21,14 @@ function hideFromTop(target) {
 }
 
 function postPlayedSong(name) {
-  alert('post played');
   $.getJSON('http://api.wunderground.com/api/d027b704c23bc8ed/geolookup/conditions/conditions/q/autoip.json', function(data) {
             weather = data['current_observation']['weather'];
             temp = data['current_observation']['temp_f'];
             $.post('http://spunapi.herokuapp.com/songs', 
                    { 'song[name]': name, 
-                     'song[user_id]': '1',
+                     'username': USERNAME,
                      'user[weather]': weather + ' ' + temp
-                   }, function() { alert(name); } );
+                   }, function() { } );
             }
     );
 }
@@ -37,11 +37,14 @@ function postPlayedSong(name) {
 
 
 function pushToProfile(userID) {
-  $('.user-info .user-name').replaceWith('<span class="user-name"></span>');
-  $('.user-info .location').replaceWith('<span class="location"></span>');
-  
+  clearProfile();
   TouchyJS.Nav.goTo('profile');
   updateProfile(userID);
+}
+
+function clearProfile() {
+  $('.user-info .user-name').replaceWith('<span class="user-name"></span>');
+  $('.user-info .location').replaceWith('<span class="location"></span>');
 }
 
 function updateProfile(userID)  {
@@ -68,7 +71,11 @@ function updateProfile(userID)  {
   $.getJSON('http://spunapi.herokuapp.com/users/'+userID+'/songs.json', function(data) {
             $.each(data, function(key, val) {
                    var li = "<li>";
+<<<<<<< HEAD
                    //li += '<a class="thumbnail" href="#" onclick="pushToProfile(' +val['id']+ ');"><img src="' +val['avatar'] + '"></a>';
+=======
+                  
+>>>>>>> d07f526c29f5d25536a982889d80eccf2c6c759a
                    li += '<span class="notification">' + val['name'] + '</span>';
                    li += '<a class="add-btn">Add</a>';
                    li += '<a class="play-btn">Play</a>';
@@ -101,6 +108,20 @@ $(document).ready(function () {
     postPlayedSong($("#player-form input[name='track']").val());
     bridge(this);
   });
+  $("#player-form a.next-song").click(function() {
+    current_track++;
+    populatePlayerForm(tracks[current_track], "", "", "");
+    return false;
+  });
+  $("#player-form a.previous-song").click(function() {
+    current_track--;
+    populatePlayerForm(tracks[current_track], "", "", "");
+    return false;
+  });
+  $("#player-form a.play-pause").click(function() {
+    populatePlayerForm("", "", "", "");
+    return false;
+  });
 });
 
 function activateTab(target){
@@ -116,16 +137,24 @@ function updateLocation(position) {
   alert(position.coords.latitude + " " + position.coords.longitude);
 }
 
-function didFetchPlaylists(spotify_playlists) {
+function didFetchPlaylists(playlists_from_spotify) {
   playlists = playlists_from_spotify;
+  var started = false;
+  $.each(playlists, function(key, meta) {
+    tracks.push(key);
+    if (started == false) {
+      started = true;
+      populatePlayerForm(meta[0], meta[1], meta[2], meta[3]);
+      current_track = 0;
+    }
+  });
 }
 
-function populatePlayerForm(playlist, track) {
+function populatePlayerForm(track, artist, album, cover) {
   $("#player-form #song-title").text(track);
-  $("#player-form #song-playlist").text(playlist);
+  $("#player-form #album-cover-img").attr("src", cover);
   $("#player-form input[name='track']").val(track);
-  $("#player-form input[name='playlist']").val(playlist);
-  //$("#player-form input[type='submit']").click();
+  $("#player-form input[type='submit']").click();
 }
 
 function bridge(form) {
@@ -139,7 +168,10 @@ function activateBackBtn() {
 }
 
 function deactivateBackBtn() {
+
 	TouchyJS.Nav.goTo('activity');
 	$('.header-back-btn').removeClass('active');
 
 }
+
+//didFetchPlaylists({"Sweet Dreams (Are Made Of This) - Steve Angello Remix Edit":["Sweet Dreams (Are Made Of This) - Steve Angello Remix Edit","1","2","3"],"I Shot The Sheriff":["I Shot The Sheriff","1","2","3"],"Gonna Make You Sweat (Everybody Dance Now)":["Gonna Make You Sweat (Everybody Dance Now)","1","2","3"],"Sun Is Shining (Funkstar De Luxe Mix)":["Sun Is Shining (Funkstar De Luxe Mix)","1","2","3"],"No Woman, No Cry - 1975\/Live At The Lyceum, London":["No Woman, No Cry - 1975\/Live At The Lyceum, London","1","2","3"],"All That She Wants":["All That She Wants","1","2","3"]});

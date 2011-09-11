@@ -237,34 +237,8 @@ static char encodingTable[64] = {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  
-  [[[self viewController].subviews objectAtIndex:0] setScrollEnabled:NO];  //to stop scrolling completely
-  [[[self viewController].subviews objectAtIndex:0] setBounces:NO]; //to stop bouncing
-  [[self viewController] setScalesPageToFit:NO];
-  [[self viewController] setBackgroundColor:[UIColor clearColor]];
-  [[self viewController] setAllowsInlineMediaPlayback:YES];
-  [[self viewController] setMediaPlaybackRequiresUserAction:NO];
-  
-  NSURL *url = [[NSBundle mainBundle] URLForResource:@"index" withExtension:@"html" subdirectory:@"web"];
-  [[self viewController] loadRequest:[NSURLRequest requestWithURL:url]];
-  
-	NSError *err = nil;
+  NSError *err = nil;
 
-	[[AVAudioSession sharedInstance] setDelegate:self];
-	BOOL success = YES;
-	success &= [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&err];
-	success &= [[AVAudioSession sharedInstance] setActive:YES error:&err];
-	if(!success) {
-		NSLog(@"Failed to activate audio session: %@", err);
-  }
-	
-  didFetchPlaylists = NO;
-  
-  [self setGlobalPlaylists:[NSMutableDictionary dictionaryWithCapacity:0]];
-  [self setGlobalTracks:[NSMutableDictionary dictionaryWithCapacity:0]];
-  [self setGlobalBrowsers:[NSMutableDictionary dictionaryWithCapacity:0]];
-
-  audio_init(&audiofifo);
   [SPSession initializeSharedSessionWithApplicationKey:[NSData dataWithBytes:&g_appkey length:g_appkey_size]
                                              userAgent:@"com.spotify.SimplePlayer"
                                                  error:&err];
@@ -283,7 +257,35 @@ static char encodingTable[64] = {
   }
   [[SPSession sharedSession] attemptLoginWithUserName:username password:password rememberCredentials:NO];
   
-  [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkBrowsers:) userInfo:nil repeats:YES];
+  [[[self viewController].subviews objectAtIndex:0] setScrollEnabled:NO];  //to stop scrolling completely
+  [[[self viewController].subviews objectAtIndex:0] setBounces:NO]; //to stop bouncing
+  [[self viewController] setScalesPageToFit:NO];
+  [[self viewController] setBackgroundColor:[UIColor clearColor]];
+  [[self viewController] setAllowsInlineMediaPlayback:YES];
+  [[self viewController] setMediaPlaybackRequiresUserAction:NO];
+  
+  NSURL *url = [[NSBundle mainBundle] URLForResource:@"index" withExtension:@"html" subdirectory:@"web"];
+  [[self viewController] loadRequest:[NSURLRequest requestWithURL:url]];
+  
+
+	[[AVAudioSession sharedInstance] setDelegate:self];
+	BOOL success = YES;
+	success &= [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&err];
+	success &= [[AVAudioSession sharedInstance] setActive:YES error:&err];
+	if(!success) {
+		NSLog(@"Failed to activate audio session: %@", err);
+  }
+	
+  didFetchPlaylists = NO;
+  countOfTracks = 0;
+
+  [self setGlobalPlaylists:[NSMutableDictionary dictionaryWithCapacity:0]];
+  [self setGlobalTracks:[NSMutableDictionary dictionaryWithCapacity:0]];
+  [self setGlobalBrowsers:[NSMutableDictionary dictionaryWithCapacity:0]];
+
+  audio_init(&audiofifo);
+
+  
   
   [self.window makeKeyAndVisible];
   return YES;
@@ -305,13 +307,18 @@ static char encodingTable[64] = {
   } else {
     if ([[[request URL] host] isEqualToString:@"player"]) {
       NSMutableDictionary *parsedQuery = [[[request URL] query] explodeToDictionaryInnerGlue:@"=" outterGlue:@"&"];
-      NSString *deplussed = [[parsedQuery objectForKey:@"track"] stringByReplacingOccurrencesOfString:@"+" withString:@" "];
-      NSString *track = [deplussed stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-      NSLog(@"parsedQuery %@", track);
-      SPTrack *trackToPlay = [globalTracks objectForKey:track];
-      NSError *err = nil;
-      [[SPSession sharedSession] seekPlaybackToOffset:0];
-      [[SPSession sharedSession] playTrack:trackToPlay error:&err];
+      NSString *track_param = [parsedQuery objectForKey:@"track"];
+      if ([track_param length] > 0) {
+        NSString *deplussed = [track_param stringByReplacingOccurrencesOfString:@"+" withString:@" "];
+        NSString *track = [deplussed stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        SPTrack *trackToPlay = [globalTracks objectForKey:track];
+        NSError *err = nil;
+        [[SPSession sharedSession] seekPlaybackToOffset:0];
+        [[SPSession sharedSession] playTrack:trackToPlay error:&err];
+        NSLog(@"parsedQuery: %@ %@", track, err);
+      } else {
+        [[SPSession sharedSession] unloadPlayback];
+      }
     }
     return NO;
   }
@@ -322,9 +329,14 @@ static char encodingTable[64] = {
   //NSLog(@"webView failed %@", error);
 }
 
-
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+  NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:@"name_preference"];
+  NSString *js = [NSString stringWithFormat:@"var USERNAME = %@;",username];
+  [webView stringByEvaluatingJavaScriptFromString:js];
+}
 -(void)sessionDidLoginSuccessfully:(SPSession *)aSession {
   //NSLog(@"sessionDidLoginSuccessfully %@", [aSession user]);
+  [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(checkBrowsers:) userInfo:nil repeats:YES];
 }
 
 
@@ -339,31 +351,43 @@ static char encodingTable[64] = {
 
 
 -(void)sessionDidChangeMetadata:(SPSession *)aSession {
-  SPPlaylistContainer *playlists = [aSession userPlaylists];  
-  if ([playlists isLoaded]) {    
-    for (id playlist_or_folder in [playlists playlists]) {
-      if ([playlist_or_folder isKindOfClass:[SPPlaylistFolder class]]) {
-        //NSLog(@"folder, wtf is afolder");
-      } else if ([playlist_or_folder isKindOfClass:[SPPlaylist class]]) {
-        if ([playlist_or_folder isLoaded]) {
-          for (SPTrack *track in [playlist_or_folder tracks]) {
-            if ([track isLoaded]) {
-              SPArtist *fa = [[track artists] objectAtIndex:0];
-              SPAlbum *a = [track album];
-              [[a cover] image];
-              SPAlbumBrowse *alb = [SPAlbumBrowse browseAlbum:a inSession:[SPSession sharedSession]];
-              SPArtistBrowse *arb = [SPArtistBrowse browseArtist:fa inSession:[SPSession sharedSession]];
-              if (alb == nil || arb == nil) {
-                NSLog(@"asfsdfsdF@#$#@$@#$@#@#$@#$");
-              } else {
+  @synchronized(self) {
+    int c = 0;
+    SPPlaylistContainer *playlists = [aSession userPlaylists];  
+    if ([playlists isLoaded] && [[playlists playlists] count] > 0) {    
+      for (id playlist_or_folder in [playlists playlists]) {
+        if ([playlist_or_folder isKindOfClass:[SPPlaylistFolder class]]) {
+          //NSLog(@"folder, wtf is afolder");
+        } else if ([playlist_or_folder isKindOfClass:[SPPlaylist class]]) {
+          c += [[playlist_or_folder tracks] count];
+          if ([playlist_or_folder isLoaded]) {
+            for (SPTrack *track in [playlist_or_folder tracks]) {
+              if ([track isLoaded]) {
+                /*
+                SPArtist *fa = [[track artists] objectAtIndex:0];
+                SPAlbum *a = [track album];
+                [[a cover] image];
+                SPAlbumBrowse *alb = [SPAlbumBrowse browseAlbum:a inSession:[SPSession sharedSession]];
+                SPArtistBrowse *arb = [SPArtistBrowse browseArtist:fa inSession:[SPSession sharedSession]];
+                if (alb == nil || arb == nil) {
+                  NSLog(@"asfsdfsdF@#$#@$@#$@#@#$@#$");
+                } else {
+                  [globalTracks setObject:track forKey:[track name]];
+                  [globalBrowsers setObject:[NSArray arrayWithObjects:alb, arb, nil] forKey:[track name]];
+                }
+                */
                 [globalTracks setObject:track forKey:[track name]];
-                [globalBrowsers setObject:[NSArray arrayWithObjects:alb, arb, nil] forKey:[track name]];
+                [globalPlaylists setObject:[NSArray arrayWithObjects:[track name], @"1", @"2", @"3", nil] forKey:[track name]];
               }
             }
           }
         }
       }
     }
+    
+    NSLog(@"c: %d", c);
+    
+    countOfTracks = c;
   }
 }
 
@@ -373,37 +397,46 @@ static char encodingTable[64] = {
 }
 
 
--(void)checkBrowsers:(id)userInfo {  
-  NSMutableArray *remove = [NSMutableArray arrayWithCapacity:0];
-  for (id track_name in [globalBrowsers allKeys]) {
-    NSArray *arb_alb = [globalBrowsers objectForKey:track_name];
-    if ([[arb_alb objectAtIndex:0] isLoaded] && [[arb_alb objectAtIndex:1] isLoaded]) {
-      SPTrack *track = [globalTracks objectForKey:track_name];      
-      SPArtist *fa = [[track artists] objectAtIndex:0];
-      SPAlbum *a = [track album];
-      if ([[a cover] isLoaded]) {
-        NSData *imgData = UIImagePNGRepresentation([[a cover] image]);
-        NSString *imgB64 = [[imgData base64Encoding] pngDataURIWithContent];
-        [globalPlaylists setObject:[NSArray arrayWithObjects:[track name], [fa name], [a name], imgB64, nil] forKey:track_name];
-        [remove addObject:track_name];
+-(void)checkBrowsers:(id)userInfo {
+  @synchronized(self) {
+    NSMutableArray *remove = [NSMutableArray arrayWithCapacity:0];
+    if ([globalBrowsers count] > 0) {
+      for (id track_name in [globalBrowsers allKeys]) {
+        NSArray *arb_alb = [globalBrowsers objectForKey:track_name];
+        if ([[arb_alb objectAtIndex:0] isLoaded] && [[arb_alb objectAtIndex:1] isLoaded]) {
+          SPTrack *track = [globalTracks objectForKey:track_name];      
+          SPArtist *fa = [[track artists] objectAtIndex:0];
+          SPAlbum *a = [track album];
+          if ([[a cover] isLoaded]) {
+            NSData *imgData = UIImagePNGRepresentation([[a cover] image]);          
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documents = [paths objectAtIndex:0];
+            NSString *filePath = [documents stringByAppendingPathComponent:track_name];
+            [imgData writeToFile:filePath atomically: YES];           
+            NSString *url = [[NSURL fileURLWithPath:filePath] absoluteString];
+            [globalPlaylists setObject:[NSArray arrayWithObjects:[track name], [fa name], [a name], url, nil] forKey:track_name];
+            [remove addObject:track_name];
+            break;
+          }
+        }
       }
     }
-  }
-  
-  for (id remove_name in remove) {
-    [globalBrowsers removeObjectForKey:remove_name];
-  }
-  
-  if ([globalPlaylists count] > 0 && [globalBrowsers count] == 0 && didFetchPlaylists == NO) {    
-    NSError *error = NULL;
-    NSData *jsonData = [[CJSONSerializer serializer] serializeObject:globalPlaylists error:&error];
-    NSString *jsonPlaylists = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    NSString *didLoadPlaylistsCallback = [NSString stringWithFormat:@"javascript:didFetchPlaylists(%@);", jsonPlaylists];
-    NSLog(@"%@", didLoadPlaylistsCallback);
-    [self.viewController stringByEvaluatingJavaScriptFromString:didLoadPlaylistsCallback];
-    didFetchPlaylists = YES;
-  } else {
-    NSLog(@"fetched: %d waiting:%d", [globalPlaylists count], [globalBrowsers count]);
+    
+    for (id remove_name in remove) {
+      [globalBrowsers removeObjectForKey:remove_name];
+    }
+      
+    if (countOfTracks > 0 && [globalTracks count] > 3 && [globalPlaylists count] > 3 && didFetchPlaylists == NO) {    
+      NSError *error = NULL;
+      NSData *jsonData = [[CJSONSerializer serializer] serializeObject:globalPlaylists error:&error];
+      NSString *jsonPlaylists = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+      NSString *didLoadPlaylistsCallback = [NSString stringWithFormat:@"javascript:didFetchPlaylists(%@);", jsonPlaylists];
+      NSLog(@"%@", didLoadPlaylistsCallback);
+      [self.viewController stringByEvaluatingJavaScriptFromString:didLoadPlaylistsCallback];
+      didFetchPlaylists = YES;
+    } else {
+      //NSLog(@"fetched: %d waiting:%d", [globalPlaylists count], [globalBrowsers count]);
+    }
   }
 }
 
