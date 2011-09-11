@@ -16,6 +16,16 @@ function hideFromTop(target) {
 	}, 200);
 }
 
+function postPlayedSong(name) {
+  $post('http://spunapi.herokuapp.com/songs', 
+        { name: name, 
+          user_id: 1 
+        });
+}
+
+/*
+  Load the initial page on app launch
+*/
 $(document).ready(function () {
   $.getJSON('http://spunapi.herokuapp.com/feed.json', function(data) {
             var items = [];
