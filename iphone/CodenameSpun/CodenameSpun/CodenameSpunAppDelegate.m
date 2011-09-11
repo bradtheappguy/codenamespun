@@ -7,8 +7,19 @@
 //
 
 #import "CodenameSpunAppDelegate.h"
+#import "libspotify/SPSession.h"
+#import <AVFoundation/AVFoundation.h>
+
+#include "libspotify/appkey.c"
+
+
+
 
 @implementation CodenameSpunAppDelegate
+
+//@synthesize session = _session;
+
+//@synthesize playlist = _playlist;
 
 @synthesize window=_window;
 
@@ -16,12 +27,47 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  // Override point for customization after application launch.
-   
-  //self.window.rootViewController = self.viewController;
+  
+  
+  NSURL *url = [[NSBundle mainBundle] URLForResource:@"index" withExtension:@"html" subdirectory:@"web"];
+  
+  [[self viewController] loadRequest:[NSURLRequest requestWithURL:url]];
+    
+	NSError *err = nil;
+
+	[[AVAudioSession sharedInstance] setDelegate:self];
+	BOOL success = YES;
+	success &= [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&err];
+	success &= [[AVAudioSession sharedInstance] setActive:YES error:&err];
+	if(!success)
+		NSLog(@"Failed to activate audio session: %@", err);
+	
+  
+  
+  audio_init(&audiofifo);
+  
+  
+  [SPSession initializeSharedSessionWithApplicationKey:[NSData dataWithBytes:&g_appkey length:g_appkey_size]
+                                             userAgent:@"com.spotify.SimplePlayer"
+                                                 error:&err];
+  
+  [[SPSession sharedSession] setDelegate:self];
+  [[SPSession sharedSession] setPlaybackDelegate:self];
+  [[SPSession sharedSession] attemptLoginWithUserName:@"diclophis" password:@"qwerty123" rememberCredentials:NO];
+  
+
+  NSLog(@"spotify session error: %@", err);
+
+  
+  
+	NSLog(@"Finished launching");
+  
+  
+  //[_session loginUser:@"diclophis" password:@"qwerty123"];
+
   
   [self.window makeKeyAndVisible];
-    return YES;
+  return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -52,11 +98,6 @@
   /*
    Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
    */
-  
-  NSURL *url = [[NSBundle mainBundle] URLForResource:@"index" withExtension:@"html" subdirectory:@"web"];
-
-  [[self viewController] loadRequest:[NSURLRequest requestWithURL:url]];
-
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -85,5 +126,99 @@
   NSLog(@"webView failed %@", error);
 }
 
+- (void)beginInterruption;
+{
+	//_wasPlayingBeforeInterruption = self.playbackVC.playing;
+	//if(_wasPlayingBeforeInterruption)
+		//[self.playbackVC togglePlaying:nil];
+}
+
+
+- (void)endInterruptionWithFlags:(NSUInteger)flags NS_AVAILABLE_IPHONE(4_0);
+{
+	//if(_wasPlayingBeforeInterruption && !self.playbackVC.playing && flags & AVAudioSessionInterruptionFlags_ShouldResume)
+		//[self.playbackVC togglePlaying:nil];
+}
+
+
+-(void)sessionDidLoginSuccessfully:(SPSession *)aSession {
+  
+
+  NSLog(@"sessionDidLoginSuccessfully %@", [aSession user]);
+  
+  
+}
+
+
+-(void)session:(SPSession *)aSession didFailToLoginWithError:(NSError *)error {
+  NSLog(@"WTF!!!!!!!!!!!!!!!!");
+}
+
+
+-(void)session:(SPSession *)aSession didLogMessage:(NSString *)aMessage{
+  NSLog(@"session: %@, message: %@", aSession, aMessage);
+}
+
+-(void)sessionDidChangeMetadata:(SPSession *)aSession {
+  //SPPlaylistContainer *playlists = [[SPSession sharedSession] userPlaylists];
+  SPPlaylistContainer *playlists = [aSession userPlaylists];
+
+  NSLog(@"sessionDidChangeMetadata %@ %d", playlists, [playlists isLoaded]);
+  
+  if ([playlists isLoaded]) {
+    SPPlaylist *first = [[playlists playlists] objectAtIndex:1];
+    if (first && [first isLoaded]) {
+      SPTrack *track = [[first tracks] objectAtIndex:0];
+      if (track && [track isLoaded]) {
+        NSError *err = nil;
+
+        NSLog(@"playlist!!!!!!!!!! %@ %@", first, track);
+        [[SPSession sharedSession] playTrack:track error:&err];
+        NSLog(@"error??? %@", err);
+      }
+    }
+  }
+}
+
+-(NSInteger)session:(SPSession *)aSession shouldDeliverAudioFrames:(const void *)audioFrames ofCount:(NSInteger)frameCount format:(const sp_audioformat *)audioFormat {
+  //NSLog(@"!!!! i can has audio");
+  //return frameCount;
+  
+  
+  audio_fifo_t *af = &audiofifo;
+  audio_fifo_data_t *afd = NULL;
+  size_t s;
+  
+  if (frameCount == 0)
+    return 0; // Audio discontinuity, do nothing
+  
+  pthread_mutex_lock(&af->mutex);
+  
+  /* Buffer one second of audio */
+  if (af->qlen > audioFormat->sample_rate) {
+    pthread_mutex_unlock(&af->mutex);
+    
+    return 0;
+  }
+  
+  s = frameCount * sizeof(int16_t) * audioFormat->channels;
+  
+  afd = malloc(sizeof(audio_fifo_data_t) + s);
+  memcpy(afd->samples, audioFrames, s);
+  
+  afd->nsamples = frameCount;
+  
+  afd->rate = audioFormat->sample_rate;
+  afd->channels = audioFormat->channels;
+  
+  TAILQ_INSERT_TAIL(&af->q, afd, link);
+  af->qlen += frameCount;
+  
+  pthread_cond_signal(&af->cond);
+  pthread_mutex_unlock(&af->mutex);
+  
+  return frameCount;
+  
+}
 
 @end

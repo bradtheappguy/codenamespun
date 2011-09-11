@@ -14,14 +14,26 @@
 		FC2A0A48141C1362006433D6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2A0A47141C1362006433D6 /* main.m */; };
 		FC2A0A4B141C1362006433D6 /* CodenameSpunAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2A0A4A141C1362006433D6 /* CodenameSpunAppDelegate.m */; };
 		FC2A0A4E141C1362006433D6 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC2A0A4C141C1362006433D6 /* MainWindow.xib */; };
+		FC2A1F3C141C3A2E00779A90 /* SPAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2A1F1B141C3A1F00779A90 /* SPAlbum.m */; };
+		FC2A1F3D141C3A2E00779A90 /* SPAlbumBrowse.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2A1F1D141C3A1F00779A90 /* SPAlbumBrowse.m */; };
+		FC2A1F3E141C3A2E00779A90 /* SPArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2A1F1F141C3A1F00779A90 /* SPArtist.m */; };
+		FC2A1F3F141C3A2E00779A90 /* SPArtistBrowse.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2A1F21141C3A2000779A90 /* SPArtistBrowse.m */; };
+		FC2A1F40141C3A2E00779A90 /* SPErrorExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2A1F23141C3A2000779A90 /* SPErrorExtensions.m */; };
+		FC2A1F41141C3A2E00779A90 /* SPImage.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2A1F25141C3A2100779A90 /* SPImage.m */; };
+		FC2A1F42141C3A2E00779A90 /* SPPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2A1F27141C3A2100779A90 /* SPPlaylist.m */; };
+		FC2A1F43141C3A2E00779A90 /* SPPlaylistContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2A1F29141C3A2200779A90 /* SPPlaylistContainer.m */; };
+		FC2A1F44141C3A2E00779A90 /* SPPlaylistFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2A1F2C141C3A2300779A90 /* SPPlaylistFolder.m */; };
+		FC2A1F45141C3A2E00779A90 /* SPPostTracksToInboxOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2A1F2F141C3A2500779A90 /* SPPostTracksToInboxOperation.m */; };
+		FC2A1F46141C3A2E00779A90 /* SPSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2A1F31141C3A2600779A90 /* SPSearch.m */; };
+		FC2A1F47141C3A2E00779A90 /* SPSession.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2A1F33141C3A2700779A90 /* SPSession.m */; };
+		FC2A1F48141C3A2E00779A90 /* SPToplist.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2A1F35141C3A2800779A90 /* SPToplist.m */; };
+		FC2A1F49141C3A2E00779A90 /* SPTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2A1F37141C3A2A00779A90 /* SPTrack.m */; };
+		FC2A1F4A141C3A2E00779A90 /* SPURLExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2A1F39141C3A2B00779A90 /* SPURLExtensions.m */; };
+		FC2A1F4B141C3A2E00779A90 /* SPUser.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2A1F3B141C3A2D00779A90 /* SPUser.m */; };
 		FC3953EC141C1A9400E3F161 /* web in Resources */ = {isa = PBXBuildFile; fileRef = FC3953EB141C1A9400E3F161 /* web */; };
 		FC395405141C228C00E3F161 /* libspotify.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC395404141C228C00E3F161 /* libspotify.a */; };
-		FC39540C141C258B00E3F161 /* appkey.c in Sources */ = {isa = PBXBuildFile; fileRef = FC395407141C258A00E3F161 /* appkey.c */; };
 		FC39540D141C258B00E3F161 /* audio.c in Sources */ = {isa = PBXBuildFile; fileRef = FC395408141C258A00E3F161 /* audio.c */; };
 		FC39540E141C258B00E3F161 /* osx-audio.c in Sources */ = {isa = PBXBuildFile; fileRef = FC39540A141C258A00E3F161 /* osx-audio.c */; };
-		FC395415141C266900E3F161 /* SpotifyPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = FC395410141C266900E3F161 /* SpotifyPlaylist.m */; };
-		FC395416141C266900E3F161 /* SpotifySession.m in Sources */ = {isa = PBXBuildFile; fileRef = FC395412141C266900E3F161 /* SpotifySession.m */; };
-		FC395417141C266900E3F161 /* SpotifyTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = FC395414141C266900E3F161 /* SpotifyTrack.m */; };
 		FC39541F141C271D00E3F161 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC39541E141C271D00E3F161 /* CoreAudio.framework */; };
 		FC395421141C272200E3F161 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC395420141C272200E3F161 /* CFNetwork.framework */; };
 		FC395423141C274E00E3F161 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC395422141C274E00E3F161 /* AudioToolbox.framework */; };
@@ -42,6 +54,42 @@
 		FC2A0A49141C1362006433D6 /* CodenameSpunAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CodenameSpunAppDelegate.h; sourceTree = "<group>"; };
 		FC2A0A4A141C1362006433D6 /* CodenameSpunAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CodenameSpunAppDelegate.m; sourceTree = "<group>"; };
 		FC2A0A4D141C1362006433D6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		FC2A1F18141C3A1F00779A90 /* CocoaLibSpotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoaLibSpotify.h; sourceTree = "<group>"; };
+		FC2A1F19141C3A1F00779A90 /* CocoaLibSpotifyPlatformImports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoaLibSpotifyPlatformImports.h; sourceTree = "<group>"; };
+		FC2A1F1A141C3A1F00779A90 /* SPAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPAlbum.h; sourceTree = "<group>"; };
+		FC2A1F1B141C3A1F00779A90 /* SPAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAlbum.m; sourceTree = "<group>"; };
+		FC2A1F1C141C3A1F00779A90 /* SPAlbumBrowse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPAlbumBrowse.h; sourceTree = "<group>"; };
+		FC2A1F1D141C3A1F00779A90 /* SPAlbumBrowse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAlbumBrowse.m; sourceTree = "<group>"; };
+		FC2A1F1E141C3A1F00779A90 /* SPArtist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPArtist.h; sourceTree = "<group>"; };
+		FC2A1F1F141C3A1F00779A90 /* SPArtist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPArtist.m; sourceTree = "<group>"; };
+		FC2A1F20141C3A1F00779A90 /* SPArtistBrowse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPArtistBrowse.h; sourceTree = "<group>"; };
+		FC2A1F21141C3A2000779A90 /* SPArtistBrowse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPArtistBrowse.m; sourceTree = "<group>"; };
+		FC2A1F22141C3A2000779A90 /* SPErrorExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPErrorExtensions.h; sourceTree = "<group>"; };
+		FC2A1F23141C3A2000779A90 /* SPErrorExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPErrorExtensions.m; sourceTree = "<group>"; };
+		FC2A1F24141C3A2000779A90 /* SPImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPImage.h; sourceTree = "<group>"; };
+		FC2A1F25141C3A2100779A90 /* SPImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPImage.m; sourceTree = "<group>"; };
+		FC2A1F26141C3A2100779A90 /* SPPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPPlaylist.h; sourceTree = "<group>"; };
+		FC2A1F27141C3A2100779A90 /* SPPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPPlaylist.m; sourceTree = "<group>"; };
+		FC2A1F28141C3A2200779A90 /* SPPlaylistContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPPlaylistContainer.h; sourceTree = "<group>"; };
+		FC2A1F29141C3A2200779A90 /* SPPlaylistContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPPlaylistContainer.m; sourceTree = "<group>"; };
+		FC2A1F2A141C3A2300779A90 /* SPPlaylistContainerInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPPlaylistContainerInternal.h; sourceTree = "<group>"; };
+		FC2A1F2B141C3A2300779A90 /* SPPlaylistFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPPlaylistFolder.h; sourceTree = "<group>"; };
+		FC2A1F2C141C3A2300779A90 /* SPPlaylistFolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPPlaylistFolder.m; sourceTree = "<group>"; };
+		FC2A1F2D141C3A2400779A90 /* SPPlaylistFolderInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPPlaylistFolderInternal.h; sourceTree = "<group>"; };
+		FC2A1F2E141C3A2400779A90 /* SPPostTracksToInboxOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPPostTracksToInboxOperation.h; sourceTree = "<group>"; };
+		FC2A1F2F141C3A2500779A90 /* SPPostTracksToInboxOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPPostTracksToInboxOperation.m; sourceTree = "<group>"; };
+		FC2A1F30141C3A2500779A90 /* SPSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPSearch.h; sourceTree = "<group>"; };
+		FC2A1F31141C3A2600779A90 /* SPSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPSearch.m; sourceTree = "<group>"; };
+		FC2A1F32141C3A2700779A90 /* SPSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPSession.h; sourceTree = "<group>"; };
+		FC2A1F33141C3A2700779A90 /* SPSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPSession.m; sourceTree = "<group>"; };
+		FC2A1F34141C3A2800779A90 /* SPToplist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPToplist.h; sourceTree = "<group>"; };
+		FC2A1F35141C3A2800779A90 /* SPToplist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPToplist.m; sourceTree = "<group>"; };
+		FC2A1F36141C3A2900779A90 /* SPTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTrack.h; sourceTree = "<group>"; };
+		FC2A1F37141C3A2A00779A90 /* SPTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPTrack.m; sourceTree = "<group>"; };
+		FC2A1F38141C3A2A00779A90 /* SPURLExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPURLExtensions.h; sourceTree = "<group>"; };
+		FC2A1F39141C3A2B00779A90 /* SPURLExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPURLExtensions.m; sourceTree = "<group>"; };
+		FC2A1F3A141C3A2C00779A90 /* SPUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPUser.h; sourceTree = "<group>"; };
+		FC2A1F3B141C3A2D00779A90 /* SPUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPUser.m; sourceTree = "<group>"; };
 		FC3953EB141C1A9400E3F161 /* web */ = {isa = PBXFileReference; lastKnownFileType = folder; name = web; path = ../../web; sourceTree = "<group>"; };
 		FC395404141C228C00E3F161 /* libspotify.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libspotify.a; sourceTree = "<group>"; };
 		FC395406141C258A00E3F161 /* api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = api.h; sourceTree = "<group>"; };
@@ -50,12 +98,6 @@
 		FC395409141C258A00E3F161 /* audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = audio.h; sourceTree = "<group>"; };
 		FC39540A141C258A00E3F161 /* osx-audio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "osx-audio.c"; sourceTree = "<group>"; };
 		FC39540B141C258A00E3F161 /* queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = queue.h; sourceTree = "<group>"; };
-		FC39540F141C266900E3F161 /* SpotifyPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotifyPlaylist.h; sourceTree = "<group>"; };
-		FC395410141C266900E3F161 /* SpotifyPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotifyPlaylist.m; sourceTree = "<group>"; };
-		FC395411141C266900E3F161 /* SpotifySession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotifySession.h; sourceTree = "<group>"; };
-		FC395412141C266900E3F161 /* SpotifySession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotifySession.m; sourceTree = "<group>"; };
-		FC395413141C266900E3F161 /* SpotifyTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotifyTrack.h; sourceTree = "<group>"; };
-		FC395414141C266900E3F161 /* SpotifyTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotifyTrack.m; sourceTree = "<group>"; };
 		FC39541E141C271D00E3F161 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		FC395420141C272200E3F161 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		FC395422141C274E00E3F161 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -145,12 +187,42 @@
 		FC395403141C228C00E3F161 /* libspotify */ = {
 			isa = PBXGroup;
 			children = (
-				FC39540F141C266900E3F161 /* SpotifyPlaylist.h */,
-				FC395410141C266900E3F161 /* SpotifyPlaylist.m */,
-				FC395411141C266900E3F161 /* SpotifySession.h */,
-				FC395412141C266900E3F161 /* SpotifySession.m */,
-				FC395413141C266900E3F161 /* SpotifyTrack.h */,
-				FC395414141C266900E3F161 /* SpotifyTrack.m */,
+				FC2A1F18141C3A1F00779A90 /* CocoaLibSpotify.h */,
+				FC2A1F19141C3A1F00779A90 /* CocoaLibSpotifyPlatformImports.h */,
+				FC2A1F1A141C3A1F00779A90 /* SPAlbum.h */,
+				FC2A1F1B141C3A1F00779A90 /* SPAlbum.m */,
+				FC2A1F1C141C3A1F00779A90 /* SPAlbumBrowse.h */,
+				FC2A1F1D141C3A1F00779A90 /* SPAlbumBrowse.m */,
+				FC2A1F1E141C3A1F00779A90 /* SPArtist.h */,
+				FC2A1F1F141C3A1F00779A90 /* SPArtist.m */,
+				FC2A1F20141C3A1F00779A90 /* SPArtistBrowse.h */,
+				FC2A1F21141C3A2000779A90 /* SPArtistBrowse.m */,
+				FC2A1F2F141C3A2500779A90 /* SPPostTracksToInboxOperation.m */,
+				FC2A1F22141C3A2000779A90 /* SPErrorExtensions.h */,
+				FC2A1F23141C3A2000779A90 /* SPErrorExtensions.m */,
+				FC2A1F24141C3A2000779A90 /* SPImage.h */,
+				FC2A1F25141C3A2100779A90 /* SPImage.m */,
+				FC2A1F26141C3A2100779A90 /* SPPlaylist.h */,
+				FC2A1F27141C3A2100779A90 /* SPPlaylist.m */,
+				FC2A1F28141C3A2200779A90 /* SPPlaylistContainer.h */,
+				FC2A1F29141C3A2200779A90 /* SPPlaylistContainer.m */,
+				FC2A1F2A141C3A2300779A90 /* SPPlaylistContainerInternal.h */,
+				FC2A1F2B141C3A2300779A90 /* SPPlaylistFolder.h */,
+				FC2A1F2C141C3A2300779A90 /* SPPlaylistFolder.m */,
+				FC2A1F2D141C3A2400779A90 /* SPPlaylistFolderInternal.h */,
+				FC2A1F2E141C3A2400779A90 /* SPPostTracksToInboxOperation.h */,
+				FC2A1F30141C3A2500779A90 /* SPSearch.h */,
+				FC2A1F31141C3A2600779A90 /* SPSearch.m */,
+				FC2A1F32141C3A2700779A90 /* SPSession.h */,
+				FC2A1F33141C3A2700779A90 /* SPSession.m */,
+				FC2A1F34141C3A2800779A90 /* SPToplist.h */,
+				FC2A1F35141C3A2800779A90 /* SPToplist.m */,
+				FC2A1F36141C3A2900779A90 /* SPTrack.h */,
+				FC2A1F37141C3A2A00779A90 /* SPTrack.m */,
+				FC2A1F38141C3A2A00779A90 /* SPURLExtensions.h */,
+				FC2A1F39141C3A2B00779A90 /* SPURLExtensions.m */,
+				FC2A1F3A141C3A2C00779A90 /* SPUser.h */,
+				FC2A1F3B141C3A2D00779A90 /* SPUser.m */,
 				FC395406141C258A00E3F161 /* api.h */,
 				FC395407141C258A00E3F161 /* appkey.c */,
 				FC395408141C258A00E3F161 /* audio.c */,
@@ -224,12 +296,24 @@
 			files = (
 				FC2A0A48141C1362006433D6 /* main.m in Sources */,
 				FC2A0A4B141C1362006433D6 /* CodenameSpunAppDelegate.m in Sources */,
-				FC39540C141C258B00E3F161 /* appkey.c in Sources */,
 				FC39540D141C258B00E3F161 /* audio.c in Sources */,
 				FC39540E141C258B00E3F161 /* osx-audio.c in Sources */,
-				FC395415141C266900E3F161 /* SpotifyPlaylist.m in Sources */,
-				FC395416141C266900E3F161 /* SpotifySession.m in Sources */,
-				FC395417141C266900E3F161 /* SpotifyTrack.m in Sources */,
+				FC2A1F3C141C3A2E00779A90 /* SPAlbum.m in Sources */,
+				FC2A1F3D141C3A2E00779A90 /* SPAlbumBrowse.m in Sources */,
+				FC2A1F3E141C3A2E00779A90 /* SPArtist.m in Sources */,
+				FC2A1F3F141C3A2E00779A90 /* SPArtistBrowse.m in Sources */,
+				FC2A1F40141C3A2E00779A90 /* SPErrorExtensions.m in Sources */,
+				FC2A1F41141C3A2E00779A90 /* SPImage.m in Sources */,
+				FC2A1F42141C3A2E00779A90 /* SPPlaylist.m in Sources */,
+				FC2A1F43141C3A2E00779A90 /* SPPlaylistContainer.m in Sources */,
+				FC2A1F44141C3A2E00779A90 /* SPPlaylistFolder.m in Sources */,
+				FC2A1F45141C3A2E00779A90 /* SPPostTracksToInboxOperation.m in Sources */,
+				FC2A1F46141C3A2E00779A90 /* SPSearch.m in Sources */,
+				FC2A1F47141C3A2E00779A90 /* SPSession.m in Sources */,
+				FC2A1F48141C3A2E00779A90 /* SPToplist.m in Sources */,
+				FC2A1F49141C3A2E00779A90 /* SPTrack.m in Sources */,
+				FC2A1F4A141C3A2E00779A90 /* SPURLExtensions.m in Sources */,
+				FC2A1F4B141C3A2E00779A90 /* SPUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +342,10 @@
 		FC2A0A55141C1362006433D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv6,
+					i386,
+				);
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -268,22 +355,29 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "armv6 i386";
 			};
 			name = Debug;
 		};
 		FC2A0A56141C1362006433D6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv6,
+					i386,
+				);
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "armv6 i386";
 			};
 			name = Release;
 		};
@@ -291,6 +385,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"ARCHS[sdk=iphoneos*]" = armv6;
+				"ARCHS[sdk=iphonesimulator*]" = i386;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -303,8 +399,8 @@
 					"\"$(SRCROOT)/CodenameSpun/libspotify\"",
 					"\"$(SDKROOT)/usr/lib/gcc/arm-apple-darwin10/4.0.1\"",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = armv6;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -324,9 +420,9 @@
 					"\"$(SRCROOT)/CodenameSpun/libspotify\"",
 					"\"$(SDKROOT)/usr/lib/gcc/arm-apple-darwin10/4.0.1\"",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = armv6;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

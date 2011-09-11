@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <libspotify/CocoaLibSpotify.h>
+#import "audio.h"
 
-@interface CodenameSpunAppDelegate : NSObject <UIApplicationDelegate, UIWebViewDelegate> {
-
+@interface CodenameSpunAppDelegate : NSObject <UIApplicationDelegate, UIWebViewDelegate, SPSessionDelegate, SPSessionPlaybackDelegate> {
+  audio_fifo_t audiofifo;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
