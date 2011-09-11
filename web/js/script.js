@@ -83,12 +83,11 @@ function didSubmitSearch(search_form) {
 }
 
 function didFetchPlaylists(itunes_playlists, spotify_playlists) {
-  $(itunes_playlists).each(function(playlist) {
-    alert(playlist.name);
-  });
-
-  $(spotify_playlists).each(function(index, name) {
-    alert(name);
+  $.each(spotify_playlists, function(key, value) {
+    alert(key);
+    $(value).each(function(index, name) {
+      alert(name);
+    });
   });
 }
 

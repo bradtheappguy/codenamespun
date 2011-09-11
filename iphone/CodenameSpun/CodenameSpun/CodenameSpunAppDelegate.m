@@ -17,6 +17,7 @@
 
 
 @synthesize globalPlaylists;
+@synthesize globalTracks;
 @synthesize window=_window;
 @synthesize viewController=_viewController;
 
@@ -39,6 +40,7 @@
 		NSLog(@"Failed to activate audio session: %@", err);
   }
 	
+  didFetchPlaylists = NO;
   
   [self setGlobalPlaylists:[NSMutableDictionary dictionaryWithCapacity:0]];
   audio_init(&audiofifo);
@@ -67,6 +69,7 @@
   if ([[[request URL] scheme] isEqualToString:@"file"]) {
     return YES;
   } else {
+    
     return NO;
   }
 }
@@ -102,20 +105,40 @@
 
 
 -(void)addPlaylistToGlobalPlaylists:(SPPlaylist *)thePlaylist {
+  SPPlaylistContainer *playlists = [[SPSession sharedSession] userPlaylists];
+
   if ([globalPlaylists objectForKey:[thePlaylist name]]) {
   } else {
-    SPPlaylistContainer *playlists = [[SPSession sharedSession] userPlaylists];
-    [globalPlaylists setObject:thePlaylist forKey:[thePlaylist name]];
-    NSInteger g_count = [globalPlaylists count];
-    NSInteger l_count = [[playlists playlists] count] - 1;
-    if (g_count == l_count) {
-      NSError *error = NULL;
-      NSData *jsonData = [[CJSONSerializer serializer] serializeObject:[globalPlaylists allKeys] error:&error];
-      NSString *jsonPlaylists = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-      NSString *didLoadPlaylistsCallback = [NSString stringWithFormat:@"javascript:didFetchPlaylists([], %@);", jsonPlaylists];
-      NSLog(@"wtf: %@", didLoadPlaylistsCallback);
-      [self.viewController stringByEvaluatingJavaScriptFromString:didLoadPlaylistsCallback];
+    //[globalPlaylists setObject:thePlaylist forKey:[thePlaylist name]];
+    
+    NSMutableArray *tracks = [NSMutableArray arrayWithCapacity:0];
+    
+    BOOL dontSet = false;
+    for (id track in [thePlaylist tracks]) {
+      if ([track isLoaded]) {
+        [tracks addObject:[track name]];
+      } else {
+        dontSet = true;
+      }
     }
+    
+    if (dontSet) {
+      NSLog(@"waiting");
+    } else {
+      [globalPlaylists setObject:tracks forKey:[thePlaylist name]];
+    }
+  }
+
+  NSInteger g_count = [globalPlaylists count];
+  NSInteger l_count = [[playlists playlists] count] - 1;
+  if (g_count == l_count && !didFetchPlaylists) {
+    NSError *error = NULL;
+    NSData *jsonData = [[CJSONSerializer serializer] serializeObject:globalPlaylists error:&error];
+    NSString *jsonPlaylists = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSString *didLoadPlaylistsCallback = [NSString stringWithFormat:@"javascript:didFetchPlaylists([], %@);", jsonPlaylists];
+    NSLog(@"%@", didLoadPlaylistsCallback);
+    [self.viewController stringByEvaluatingJavaScriptFromString:didLoadPlaylistsCallback];
+    didFetchPlaylists = YES;
   }
 }
 
