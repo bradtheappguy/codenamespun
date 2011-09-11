@@ -1,14 +1,18 @@
 body {
-    font-family: arial;
+    font-family: helvetica, arial, sans-serif;
     font-size: 12px;
     line-height: 20px;
+	background:#666;
+	margin:0;
+	padding:0;
+	
 }
 .touchyjs-header{
-    background: #1B5790;
+    background: url(../images/player-bg.png) 0 0 no-repeat;
     color: white;
     height: 93px;
     line-height: 30px;
-    padding: 10px;
+	overflow:hidden;
 }
 .touchyjs-footer{
    	background:transparent url(../images/tn-bg.png) 0 0 repeat-x;
@@ -46,10 +50,11 @@ body {
 	margin-bottom:0;
 }
 .touchyjs-footer .tab-navigator a .title {
-	margin-top:-8px;
+	margin-top:2px;
 	top:30px;
 	text-align:center;
 	display:block;
+	line-height:10px;
 }
 .touchyjs-footer .tab-navigator a.activity .icon {
 	background:url(../images/icon-activity.png) center top no-repeat;
@@ -80,6 +85,76 @@ body {
 	border-radius:10px;
 	background: transparent url(../images/tab-active-bg.png) 0 0 repeat;
 	
+}
+
+.tab-view .tab {
+	opacity:0;
+	position:absolute;
+}
+.tab-view .active {
+	opacity:1;
+}
+
+
+
+.table-view{
+	margin:0;
+	padding:0;
+}
+.activity-feed li {
+	margin:0;
+	padding:0;
+	background:url(../images/activity-bg.png) 0 0 no-repeat;
+	height:90px;
+	overflow:hidden;
+	position:relative;
+	width:320px;
+}
+.activity-feed .thumbnail{
+	position:absolute;
+	top:20px;
+	left:16px;
+	width:40px;
+	height:40px;
+}
+
+.activity-feed .add-btn {
+	display:block;
+	overflow:hidden;
+	width:33px;
+	height:0;
+	padding-top:33px;
+	background: url(../images/activity_add_btn.png) 0 0 no-repeat;
+	position:absolute;
+	right:11px;
+	top:20px;
+}
+
+.activity-feed .play-btn {
+	display:block;
+	overflow:hidden;
+	width:22px;
+	height:0;
+	padding-top:25px;
+	background: url(../images/activity_play_btn.png) 0 0 no-repeat;
+	position:absolute;
+	right:20px;
+	top:50px;
+}
+
+.activity-feed img {
+	width:40px;
+	height:40px;
+}
+.activity-feed .notification{
+	width:300px;
+	height:700px;
+	display:block;
+	position:absolute;
+	top:15px;
+	left:75px;
+	font-size:11px;
+	color:#000;
 }
 
 h1, h1 a{
@@ -125,7 +200,9 @@ A.btn-back {
     }
 
 .touchyjs-content{
-    background: white;
+    background: #666;
+	color:#fff;
+	padding-bottom:45px;
 }
 .touchyjs-custom-view{
     background: white;

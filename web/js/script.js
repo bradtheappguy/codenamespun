@@ -17,6 +17,7 @@ function hideFromTop(target) {
 }
 
 function postPlayedSong(name) {
+  alert('post played');
   $.getJSON('http://api.wunderground.com/api/d027b704c23bc8ed/geolookup/conditions/conditions/q/autoip.json', function(data) {
             weather = data['current_observation']['weather'];
             temp = data['current_observation']['temp_f'];
@@ -88,8 +89,24 @@ $(function() {
 		$('.tab-navigator a').removeClass('active');
 		$(this).addClass('active');
 	 });
+	
+	
+	
 });
 
+
+function activateTab(target){
+
+	var targetParent = $(target).parent();
+	var indexNum = $(target).index();
+	targetParent.children('.tab-view-buttons').children('a').removeClass('active');
+	targetParent.children('.tab-view-buttons').children('a:nth-child('+indexNum+')').addClass('active');
+	
+	targetParent.children('.tab').removeClass('active');
+	$(target).addClass('active');
+	
+	
+}
 function updateLocation(position) {
   alert(position.coords.latitude + " " + position.coords.longitude);
 }

@@ -83,7 +83,18 @@
                                                  error:&err];
   [[SPSession sharedSession] setDelegate:self];
   [[SPSession sharedSession] setPlaybackDelegate:self];
-  [[SPSession sharedSession] attemptLoginWithUserName:@"diclophis" password:@"qwerty123" rememberCredentials:NO];
+  
+  [[NSUserDefaults standardUserDefaults]registerDefaults:nil];
+  [[NSUserDefaults standardUserDefaults] synchronize];
+  
+  NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:@"name_preference"];
+  NSString *password = [[NSUserDefaults standardUserDefaults] stringForKey:@"password_preference"];
+  if (!username || !password) {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"Set USername and password in settings" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];
+    [alert release];
+  }
+  [[SPSession sharedSession] attemptLoginWithUserName:username password:password rememberCredentials:NO];
   
   [self.window makeKeyAndVisible];
   return YES;
@@ -143,7 +154,7 @@
 
 
 -(void)session:(SPSession *)aSession didLogMessage:(NSString *)aMessage{
-  //NSLog(@"session: %@, message: %@", aSession, aMessage);
+  NSLog(@"session: %@, message: %@", aSession, aMessage);
 }
 
 
