@@ -37,7 +37,9 @@ function getWeather() {
 */
 
 function pushToProfile(userID) {
-  alert(userID);
+  $('.user-info .user-name').replaceWith('<span class="user-name"></span>');
+  $('.user-info .location').replaceWith('<span class="location"></span>');
+  
   TouchyJS.Nav.goTo('profile');
   $.getJSON('http://spunapi.herokuapp.com/users/'+userID, function(data) {
             name = data['name'];
@@ -45,8 +47,23 @@ function pushToProfile(userID) {
             genre = data['genre']
             weather = data['weather']
             status = data['status']
-            });  
-  return false;
+            $('.avatar-img img').attr('src',avatar); 
+            $('.user-info .user-name').replaceWith('<span class="user-name">'+name+'</span>');
+            $('.user-info .location').replaceWith('<span class="location">'+weather+'</span>');
+  });
+  
+  $.getJSON('http://spunapi.herokuapp.com/users/'+userID+'/badges', function(data) {
+            $.each(data, function(key, val) {
+                   alert(val['name']+val['image']);
+                   });
+  });
+  
+  $.getJSON('http://spunapi.herokuapp.com/users/'+userID+'/songs', function(data) {
+            $.each(data, function(key, val) {
+                   alert(val['name']);
+                   });
+            });
+  
 }
 
 $(document).ready(function () {
