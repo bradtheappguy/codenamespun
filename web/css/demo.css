@@ -94,7 +94,7 @@ body {
 
 .tab-view .tab {
 	display:none;
-	position:absolute;
+
 }
 .tab.active {
 	display:block;
@@ -178,7 +178,7 @@ body {
 	padding:0;
 	width:100%;
 	display:block;
-	
+	height:auto;
 }
 
 .table-view a.cell {
@@ -411,6 +411,7 @@ h1, h1 a{
 .bottom-spacer {
 	display:block;
 	height:60px;
+	clear:both;
 }
 .btn-back {
 	position:absolute;
@@ -427,7 +428,7 @@ h1, h1 a{
     background: white;
 	position:absolute;
 	opacity:1;
-	height:100%;
+
 	width:100%;
 	top:-100%;
 	z-index:1000;

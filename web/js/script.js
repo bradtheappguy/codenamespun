@@ -71,11 +71,9 @@ function updateProfile(userID)  {
   $.getJSON('http://spunapi.herokuapp.com/users/'+userID+'/songs.json', function(data) {
             $.each(data, function(key, val) {
                    var li = "<li>";
-<<<<<<< HEAD
+
                    //li += '<a class="thumbnail" href="#" onclick="pushToProfile(' +val['id']+ ');"><img src="' +val['avatar'] + '"></a>';
-=======
-                  
->>>>>>> d07f526c29f5d25536a982889d80eccf2c6c759a
+
                    li += '<span class="notification">' + val['name'] + '</span>';
                    li += '<a class="add-btn">Add</a>';
                    li += '<a class="play-btn">Play</a>';
@@ -94,8 +92,10 @@ $(document).ready(function () {
       var li = "<li>";;
       li += '<a class="thumbnail" href="#" onclick="pushToProfile(' +val['id']+ '); activateBackBtn();"><img src="' + val['avatar'] + '"></a>';
       li += '<span class="notification">' + val['status'] + '</span>';
-      li += '<a class="add-btn">Add</a>';
+     if (val['status'].search('badge') < 0)  {
+	  li += '<a class="add-btn">Add</a>';
       li += '<a class="play-btn">Play</a>';
+	 } 
       li += "</li>";
       $('#activity .table-view').append(li)
     });
