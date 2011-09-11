@@ -315,6 +315,8 @@ h1, h1 a{
 .touchyjs-content{
     background: #666;
 	color:#fff;
+	margin-bottom:200px;
+	
 }
 .touchyjs-custom-view{
     background: white;
