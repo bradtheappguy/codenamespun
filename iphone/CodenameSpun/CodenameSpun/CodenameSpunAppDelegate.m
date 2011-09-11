@@ -9,11 +9,10 @@
 #import "CodenameSpunAppDelegate.h"
 #import "libspotify/SPSession.h"
 #import <AVFoundation/AVFoundation.h>
-
+#import "TouchJSON/JSON/CJSONSerializer.h"
 #include "libspotify/appkey.c"
 
-
-
+static const NSMutableDictionary *globalPlaylists;
 
 @implementation CodenameSpunAppDelegate
 
@@ -157,17 +156,46 @@
 -(void)sessionDidChangeMetadata:(SPSession *)aSession {
   SPPlaylistContainer *playlists = [aSession userPlaylists];  
   if ([playlists isLoaded]) {
-    SPPlaylist *first = [[playlists playlists] objectAtIndex:1];
-    if (first && [first isLoaded]) {
-      SPTrack *track = [[first tracks] objectAtIndex:0];
-      if (track && [track isLoaded]) {
-        NSError *err = nil;        
-        [[SPSession sharedSession] seekPlaybackToOffset:0];
-        [[SPSession sharedSession] playTrack:track error:&err];
+    if (globalPlaylists == nil) {
+      globalPlaylists = [NSMutableDictionary dictionaryWithCapacity:0];
+    }
+    
+    for (id playlist_or_folder in [playlists playlists]) {
+      if ([playlist_or_folder isKindOfClass:[SPPlaylistFolder class]]) {
+        NSLog(@"folder, wtf is afolder");
+      } else if ([playlist_or_folder isKindOfClass:[SPPlaylist class]]) {
+        if ([playlist_or_folder isLoaded]) {
+          NSLog(@"list: %@", playlist_or_folder);
+          //[globalPlaylists setObject:playlist_or_folder forKey:[playlist_or_folder name]];
+        }
       }
     }
+    
+    NSError *error = NULL;
+    NSData *jsonData = [[CJSONSerializer serializer] serializeObject:[globalPlaylists allKeys] error:&error];
+    NSLog(@"wtf: %@ %@", error, [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
+    
   }
 }
+
+
+/*
+ SPPlaylist *first = [[playlists playlists] objectAtIndex:1];
+ if (first && [first isLoaded]) {
+ SPTrack *track = [[first tracks] objectAtIndex:0];
+ if (track && [track isLoaded]) {
+ 
+ 
+ //NSError *err = nil;        
+ //[[SPSession sharedSession] seekPlaybackToOffset:0];
+ //[[SPSession sharedSession] playTrack:track error:&err];
+ 
+ 
+ 
+ 
+ }
+ }
+ */
 
 -(NSInteger)session:(SPSession *)aSession shouldDeliverAudioFrames:(const void *)audioFrames ofCount:(NSInteger)frameCount format:(const sp_audioformat *)audioFormat {
   audio_fifo_t *af = &audiofifo;
