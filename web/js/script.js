@@ -68,7 +68,7 @@ function updateProfile(userID)  {
   $.getJSON('http://spunapi.herokuapp.com/users/'+userID+'/songs.json', function(data) {
             $.each(data, function(key, val) {
                    var li = "<li>";
-                   li += '<a class="thumbnail" href="#" onclick="pushToProfile(' +val['id']+ ');"><img src="' +val['avatar'] + '"></a>';
+                  
                    li += '<span class="notification">' + val['name'] + '</span>';
                    li += '<a class="add-btn">Add</a>';
                    li += '<a class="play-btn">Play</a>';
