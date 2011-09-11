@@ -59,10 +59,17 @@ function pushToProfile(userID) {
                    });
   });
   
-  $.getJSON('http://spunapi.herokuapp.com/users/'+userID+'/songs', function(data) {
+  $.getJSON('http://spunapi.herokuapp.com/users/'+userID+'/songs.json', function(data) {
             $.each(data, function(key, val) {
-                   alert(val['name']);
+                   var li = "<li>";
+                   li += '<a class="thumbnail" href="#" onclick="pushToProfile(' +val['id']+ ');"><img src="' +val['avatar'] + '"></a>';
+                   li += '<span class="notification">' + val['name'] + '</span>';
+                   li += '<a class="add-btn">Add</a>';
+                   li += '<a class="play-btn">Play</a>';
+                   li += "</li>";
+                   $('#profile .activity-feed').append(li);
                    });
+                  
             });
   
 }
@@ -71,7 +78,7 @@ $(document).ready(function () {
   $.getJSON('http://spunapi.herokuapp.com/feed.json', function(data) {
             var items = [];
             $.each(data, function(key, val) {                  
-                   var li = "<li>";;
+                   var li = "<li>";
                    li += '<a class="thumbnail" href="#" onclick="pushToProfile(' +val['id']+ ');"><img src="' + val['avatar'] + '"></a>';
                    li += '<span class="notification">' + val['status'] + '</span>';
                    li += '<a class="add-button">Add</a>';
