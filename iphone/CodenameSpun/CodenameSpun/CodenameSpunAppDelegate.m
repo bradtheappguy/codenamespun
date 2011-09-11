@@ -259,7 +259,8 @@ static char encodingTable[64] = {
   }
 	
   didFetchPlaylists = NO;
-  
+  countOfTracks = 0;
+
   [self setGlobalPlaylists:[NSMutableDictionary dictionaryWithCapacity:0]];
   [self setGlobalTracks:[NSMutableDictionary dictionaryWithCapacity:0]];
   [self setGlobalBrowsers:[NSMutableDictionary dictionaryWithCapacity:0]];
@@ -283,7 +284,7 @@ static char encodingTable[64] = {
   }
   [[SPSession sharedSession] attemptLoginWithUserName:username password:password rememberCredentials:NO];
   
-  [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkBrowsers:) userInfo:nil repeats:YES];
+  [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(checkBrowsers:) userInfo:nil repeats:YES];
   
   [self.window makeKeyAndVisible];
   return YES;
@@ -307,11 +308,11 @@ static char encodingTable[64] = {
       NSMutableDictionary *parsedQuery = [[[request URL] query] explodeToDictionaryInnerGlue:@"=" outterGlue:@"&"];
       NSString *deplussed = [[parsedQuery objectForKey:@"track"] stringByReplacingOccurrencesOfString:@"+" withString:@" "];
       NSString *track = [deplussed stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-      NSLog(@"parsedQuery %@", track);
       SPTrack *trackToPlay = [globalTracks objectForKey:track];
       NSError *err = nil;
       [[SPSession sharedSession] seekPlaybackToOffset:0];
       [[SPSession sharedSession] playTrack:trackToPlay error:&err];
+      NSLog(@"parsedQuery: %@ %@", track, err);
     }
     return NO;
   }
@@ -343,12 +344,15 @@ static char encodingTable[64] = {
 
 
 -(void)sessionDidChangeMetadata:(SPSession *)aSession {
+  @synchronized(self) {
+  int c = 0;
   SPPlaylistContainer *playlists = [aSession userPlaylists];  
-  if ([playlists isLoaded]) {    
+  if ([playlists isLoaded] && [[playlists playlists] count] > 0) {    
     for (id playlist_or_folder in [playlists playlists]) {
       if ([playlist_or_folder isKindOfClass:[SPPlaylistFolder class]]) {
         //NSLog(@"folder, wtf is afolder");
       } else if ([playlist_or_folder isKindOfClass:[SPPlaylist class]]) {
+        c += [[playlist_or_folder tracks] count];
         if ([playlist_or_folder isLoaded]) {
           for (SPTrack *track in [playlist_or_folder tracks]) {
             if ([track isLoaded]) {
@@ -369,6 +373,11 @@ static char encodingTable[64] = {
       }
     }
   }
+  
+  NSLog(@"c: %d", c);
+  
+  countOfTracks = c;
+  }
 }
 
 
@@ -377,19 +386,27 @@ static char encodingTable[64] = {
 }
 
 
--(void)checkBrowsers:(id)userInfo {  
+-(void)checkBrowsers:(id)userInfo {
+  @synchronized(self) {
   NSMutableArray *remove = [NSMutableArray arrayWithCapacity:0];
-  for (id track_name in [globalBrowsers allKeys]) {
-    NSArray *arb_alb = [globalBrowsers objectForKey:track_name];
-    if ([[arb_alb objectAtIndex:0] isLoaded] && [[arb_alb objectAtIndex:1] isLoaded]) {
-      SPTrack *track = [globalTracks objectForKey:track_name];      
-      SPArtist *fa = [[track artists] objectAtIndex:0];
-      SPAlbum *a = [track album];
-      if ([[a cover] isLoaded]) {
-        NSData *imgData = UIImagePNGRepresentation([[a cover] image]);
-        NSString *imgB64 = [[imgData base64Encoding] pngDataURIWithContent];
-        [globalPlaylists setObject:[NSArray arrayWithObjects:[track name], [fa name], [a name], imgB64, nil] forKey:track_name];
-        [remove addObject:track_name];
+  if ([globalBrowsers count] > 0) {
+    for (id track_name in [globalBrowsers allKeys]) {
+      NSArray *arb_alb = [globalBrowsers objectForKey:track_name];
+      if ([[arb_alb objectAtIndex:0] isLoaded] && [[arb_alb objectAtIndex:1] isLoaded]) {
+        SPTrack *track = [globalTracks objectForKey:track_name];      
+        SPArtist *fa = [[track artists] objectAtIndex:0];
+        SPAlbum *a = [track album];
+        if ([[a cover] isLoaded]) {
+          NSData *imgData = UIImagePNGRepresentation([[a cover] image]);          
+          NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+          NSString *documents = [paths objectAtIndex:0];
+          NSString *filePath = [documents stringByAppendingPathComponent:track_name];
+          [imgData writeToFile:filePath atomically: YES];           
+          NSString *url = [[NSURL fileURLWithPath:filePath] absoluteString];
+          [globalPlaylists setObject:[NSArray arrayWithObjects:[track name], [fa name], [a name], url, nil] forKey:track_name];
+          [remove addObject:track_name];
+          break;
+        }
       }
     }
   }
@@ -397,8 +414,8 @@ static char encodingTable[64] = {
   for (id remove_name in remove) {
     [globalBrowsers removeObjectForKey:remove_name];
   }
-  
-  if ([globalPlaylists count] > 0 && [globalBrowsers count] == 0 && didFetchPlaylists == NO) {    
+    
+  if (countOfTracks > 0 && countOfTracks == [globalTracks count] && [globalBrowsers count] == 0 && didFetchPlaylists == NO) {    
     NSError *error = NULL;
     NSData *jsonData = [[CJSONSerializer serializer] serializeObject:globalPlaylists error:&error];
     NSString *jsonPlaylists = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
@@ -408,6 +425,7 @@ static char encodingTable[64] = {
     didFetchPlaylists = YES;
   } else {
     NSLog(@"fetched: %d waiting:%d", [globalPlaylists count], [globalBrowsers count]);
+  }
   }
 }
 

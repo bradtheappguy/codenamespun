@@ -17,6 +17,7 @@
   NSMutableDictionary *globalTracks;
   NSMutableDictionary *globalBrowsers;
   BOOL didFetchPlaylists;
+  int countOfTracks;
 }
 
 
