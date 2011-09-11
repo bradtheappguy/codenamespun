@@ -168,7 +168,7 @@ body {
 	color:#333;
 	text-decoration:none;
 	width:100%;
-	display:block;
+	position:relative;
 }
 .activity-feed li {
 	margin:0;
