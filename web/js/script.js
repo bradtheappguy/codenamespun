@@ -31,6 +31,13 @@ $(document).ready(function () {
   });               
 });
 
+$(function() {
+	 $('.tab-navigator a').click(function(){
+		$('.tab-navigator a').removeClass('active');
+		$(this).addClass('active');
+	 });
+});
+
 function didSubmitSearch(search_form) {
   search_form.term.blur();
   bridge(search_form);

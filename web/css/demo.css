@@ -6,7 +6,7 @@ body {
 .touchyjs-header{
     background: #1B5790;
     color: white;
-    height: 56px;
+    height: 93px;
     line-height: 30px;
     padding: 10px;
 }
@@ -18,16 +18,70 @@ body {
 	bottom:0;
 	width:100%;
 	margin:0;
+	border-top:2px solid #000;
 	
 }
 
 .touchyjs-footer .tab-navigator a{
-	display:inline-block;
-	width:103px;
+	display:block;
+	float:left;
+	width:106px;
 	text-align:center;
 	color:#fff;
 	text-decoration:none;
+
+	height:45px;
+	text-shadow: 2px 1px #000;
+	font-weight:bold;
+	font-size:10px;
+	margin-right:1px;
+	
 }
+.touchyjs-footer .tab-navigator a .icon {
+	width:25px;
+	height:25px;
+	display:block;
+	margin:auto;
+	margin-top:3px;
+	margin-bottom:0;
+}
+.touchyjs-footer .tab-navigator a .title {
+	margin-top:-8px;
+	top:30px;
+	text-align:center;
+	display:block;
+}
+.touchyjs-footer .tab-navigator a.activity .icon {
+	background:url(../images/icon-activity.png) center top no-repeat;
+}
+.touchyjs-footer .tab-navigator a.discover .icon{
+	background:url(../images/icon-discover.png) center 2px no-repeat;
+}
+.touchyjs-footer .tab-navigator a.profile .icon{
+	background:url(../images/icon-profile.png) center 2px no-repeat;
+
+}
+
+ .touchyjs-footer .tab-navigator a.activity.active .icon {
+	background-position:center -35px;
+}
+.touchyjs-footer .tab-navigator a.discover.active .icon {
+	background-position:center -30px;
+}
+ .touchyjs-footer .tab-navigator a.profile.active .icon {
+	background-position:center -30px;
+}
+
+.touchyjs-footer .tab-navigator a.profile {
+	margin-right:0 !important;
+}
+
+.touchyjs-footer .tab-navigator a.active, .touchyjs-footer .tab-navigator a:hover{
+	border-radius:10px;
+	background: transparent url(../images/tab-active-bg.png) 0 0 repeat;
+	
+}
+
 h1, h1 a{
     color: #ffffff !important;
     font-size: 16px;
