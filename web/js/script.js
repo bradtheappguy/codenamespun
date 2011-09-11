@@ -4,6 +4,7 @@ var global_playlists = null;
 var search_callback = null;
 var current_playlist = null;
 var current_track = null;
+var tracks = new Array();
 var playlists = null;
 
 function revealFromTop(target) {
@@ -20,7 +21,6 @@ function hideFromTop(target) {
 }
 
 function postPlayedSong(name) {
-  alert('post played');
   $.getJSON('http://api.wunderground.com/api/d027b704c23bc8ed/geolookup/conditions/conditions/q/autoip.json', function(data) {
             weather = data['current_observation']['weather'];
             temp = data['current_observation']['temp_f'];
@@ -28,7 +28,7 @@ function postPlayedSong(name) {
                    { 'song[name]': name, 
                      'username': USERNAME,
                      'user[weather]': weather + ' ' + temp
-                   }, function() { alert('updated'); } );
+                   }, function() { } );
             }
     );
 }
@@ -104,6 +104,20 @@ $(document).ready(function () {
     postPlayedSong($("#player-form input[name='track']").val());
     bridge(this);
   });
+  $("#player-form a.next-song").click(function() {
+    current_track++;
+    populatePlayerForm(tracks[current_track], "", "", "");
+    return false;
+  });
+  $("#player-form a.previous-song").click(function() {
+    current_track--;
+    populatePlayerForm(tracks[current_track], "", "", "");
+    return false;
+  });
+  $("#player-form a.play-pause").click(function() {
+    populatePlayerForm("", "", "", "");
+    return false;
+  });
 });
 
 function activateTab(target){
@@ -123,9 +137,11 @@ function didFetchPlaylists(playlists_from_spotify) {
   playlists = playlists_from_spotify;
   var started = false;
   $.each(playlists, function(key, meta) {
+    tracks.push(key);
     if (started == false) {
       started = true;
       populatePlayerForm(meta[0], meta[1], meta[2], meta[3]);
+      current_track = 0;
     }
   });
 }
@@ -153,3 +169,5 @@ function deactivateBackBtn() {
 	$('.back-btn').removeClass('active');
 	$('.back-btn').unbind('click', decativateBackBtn);
 }
+
+//didFetchPlaylists({"Sweet Dreams (Are Made Of This) - Steve Angello Remix Edit":["Sweet Dreams (Are Made Of This) - Steve Angello Remix Edit","1","2","3"],"I Shot The Sheriff":["I Shot The Sheriff","1","2","3"],"Gonna Make You Sweat (Everybody Dance Now)":["Gonna Make You Sweat (Everybody Dance Now)","1","2","3"],"Sun Is Shining (Funkstar De Luxe Mix)":["Sun Is Shining (Funkstar De Luxe Mix)","1","2","3"],"No Woman, No Cry - 1975\/Live At The Lyceum, London":["No Woman, No Cry - 1975\/Live At The Lyceum, London","1","2","3"],"All That She Wants":["All That She Wants","1","2","3"]});
