@@ -5,13 +5,13 @@ body {
 	background:#666;
 	margin:0;
 	padding:0;
+	
 }
 .touchyjs-header{
     background: url(../images/player-bg.png) 0 0 no-repeat;
     color: white;
     height: 93px;
     line-height: 30px;
-    padding: 10px;
 	overflow:hidden;
 }
 .touchyjs-footer{
@@ -202,6 +202,7 @@ A.btn-back {
 .touchyjs-content{
     background: #666;
 	color:#fff;
+	padding-bottom:45px;
 }
 .touchyjs-custom-view{
     background: white;
