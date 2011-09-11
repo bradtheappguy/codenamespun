@@ -8,7 +8,7 @@ body {
 	
 }
 .touchyjs-header{
-    background: url(../images/player-bg.png) 0 52px no-repeat;
+    background: url(../images/player-bg.png) 0 40px no-repeat;
     color: white;
     height: 154px;
     line-height: 30px;
@@ -93,11 +93,11 @@ body {
 }
 
 .tab-view .tab {
-	opacity:0;
+	display:none;
 	position:absolute;
 }
 .tab-view .active {
-	opacity:1;
+	display:block;
 }
 
 #music-player #player-controls {
@@ -160,7 +160,7 @@ body {
 	
 }
 
-.table-view li {
+.table-view a.cell {
 	display:block;
 	background:#fff;
 	border-top:1px solid #333;
@@ -193,10 +193,11 @@ body {
 	width:33px;
 	height:0;
 	padding-top:33px;
-	background: url(../images/activity_add_btn.png) 0 0 no-repeat;
+	background: transparent url(../images/activity_add_btn.png) 0 0 no-repeat;
 	position:absolute;
 	right:11px;
 	top:20px;
+	border:none;
 }
 
 .activity-feed .play-btn {
@@ -205,10 +206,11 @@ body {
 	width:22px;
 	height:0;
 	padding-top:25px;
-	background: url(../images/activity_play_btn.png) 0 0 no-repeat;
+	background: transparent url(../images/activity_play_btn.png) 0 0 no-repeat;
 	position:absolute;
 	right:20px;
 	top:50px;
+	border:none;
 }
 
 .activity-feed img {
@@ -226,6 +228,20 @@ body {
 	color:#000;
 }
 
+#profile .activity-feed li {
+	background:transparent url(../images/activity-bg-profile.png) 0 0 no-repeat;
+	height:69px;
+}
+#profile .activity-feed .notification{ 
+	left:20px;
+}
+
+#profile .add-btn {
+	top:10px;
+}
+#profile .play-btn {
+	top:40px;
+}
 .block-menu a {
 	display:block;
 	background:#fff;

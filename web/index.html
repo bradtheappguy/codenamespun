@@ -83,7 +83,6 @@
    
         <div class="touchyjs-content" id="discover">
             <div>
-                <div class='title-bar'>Discover</div>
 				<div class='block-menu'>
 					<a href="" onclick="TouchyJS.Nav.goTo('discover-list-view'); return false;">Friends</a>
 					<a href="" onclick="TouchyJS.Nav.goTo('discover-list-view'); return false;">Trending</a>
@@ -107,33 +106,33 @@
 						<a href="#" onclick='activateTab("#tab-tracks"); return false;'>Tracks</a>
 					</div>
 					<div id='tab-artists' class='active tab'>
-	               	 	<ul class='table-view artist-list'>
-							<li onclick="TouchyJS.Nav.goTo('discover-list-view-album'); return false;">
+	               	 	<div class='table-view artist-list'>
+							<a href='' onclick="TouchyJS.Nav.goTo('discover-list-view-album'); return false;" class='cell'>
 								<img src="[IMG]" class="" />
 								<span class="artist-name">[ARTIST]</span>
 								
-							</li>
-		                </ul>
+							</a>
+		                </div>
 					</div>
 					<div id='tab-albums' class='tab'>
-	               	 	<ul class='table-view album-list'>
-							<li onclick="TouchyJS.Nav.goTo('discover-list-view-track'); return false;">
+	               	 	<div class='table-view album-list'>
+							<a  href='' onclick="TouchyJS.Nav.goTo('discover-list-view-track'); return false;" class='cell'>
 								<img src="[IMG]" class="" />
 								<span class="album-name">[ALBUM]</span>
 								<span class="artist-name">by [ARTIST]</span>
 						
-							</li>
-		                </ul>
+							</a>
+		                </div>
 					</div>
 					<div id='tab-tracks' class='tab'>
-	               	 	<ul class='table-view track-list'>
-							<li>
+	               	 	<div class='table-view track-list'>
+							<a  class='cell'>
 							
 								<span class="track-name">[TRACK]</span>
 								<span class="artist-name">[ARTIST] - [ALBUM]</span>
 					
-							</li>
-		                </ul>
+							</a>
+		                </div>
 					</div>
 				</div>
                 <br>
@@ -144,13 +143,13 @@
         </div>
 		<div class="touchyjs-content" id="discover-list-view-artist">
             <div>
-				<ul class='table-view artist-list'>
-					<li onclick="TouchyJS.Nav.goTo('discover-list-view-album'); return false;">
+				<div class='table-view artist-list'>
+					<a href="" onclick="TouchyJS.Nav.goTo('discover-list-view-album'); return false;"  class='cell'>
 						<img src="[IMG]" class="" />
 						<span class="artist-name">[ARTIST]</span>
 						
-					</li>
-                </ul>
+					</a>
+                </div>
 
                 <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
                 
@@ -159,14 +158,14 @@
         </div>
 		<div class="touchyjs-content" id="discover-list-view-album">
             <div>
-				<ul class='table-view album-list'>
-					<li onclick="TouchyJS.Nav.goTo('discover-list-view-track'); return false;">
+				<div class='table-view album-list'>
+					<a href="" onclick="TouchyJS.Nav.goTo('discover-list-view-track'); return false;"  class='cell'>
 						<img src="[IMG]" class="" />
 						<span class="album-name">[ALBUM]</span>
 						<span class="artist-name">by [ARTIST]</span>
 				
-					</li>
-                </ul>
+					</a>
+                </div>
 
                 <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
                 
@@ -175,14 +174,14 @@
         </div>
 		<div class="touchyjs-content" id="discover-list-view-track">
             <div>
-				<ul class='table-view track-list'>
-					<li>
+				<div class='table-view track-list'>
+					<a  class='cell'>
 					
 						<span class="track-name">[TRACK]</span>
 						<span class="artist-name">[ARTIST] - [ALBUM]</span>
 			
-					</li>
-                </ul>
+					</a>
+                </div>
 
                 <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
                 
