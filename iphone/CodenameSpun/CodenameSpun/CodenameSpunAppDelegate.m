@@ -322,7 +322,11 @@ static char encodingTable[64] = {
   //NSLog(@"webView failed %@", error);
 }
 
-
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+  NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:@"name_preference"];
+  NSString *js = [NSString stringWithFormat:@"var USERNAME = %@;",username];
+  [webView stringByEvaluatingJavaScriptFromString:js];
+}
 -(void)sessionDidLoginSuccessfully:(SPSession *)aSession {
   //NSLog(@"sessionDidLoginSuccessfully %@", [aSession user]);
 }

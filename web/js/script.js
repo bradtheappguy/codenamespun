@@ -26,9 +26,9 @@ function postPlayedSong(name) {
             temp = data['current_observation']['temp_f'];
             $.post('http://spunapi.herokuapp.com/songs', 
                    { 'song[name]': name, 
-                     'song[username]': 'bradsmithinc',
+                     'username': USERNAME,
                      'user[weather]': weather + ' ' + temp
-                   }, function() { alert(name); } );
+                   }, function() { alert('updated'); } );
             }
     );
 }
@@ -37,11 +37,14 @@ function postPlayedSong(name) {
 
 
 function pushToProfile(userID) {
-  $('.user-info .user-name').replaceWith('<span class="user-name"></span>');
-  $('.user-info .location').replaceWith('<span class="location"></span>');
-  
+  clearProfile();
   TouchyJS.Nav.goTo('profile');
   updateProfile(userID);
+}
+
+function clearProfile() {
+  $('.user-info .user-name').replaceWith('<span class="user-name"></span>');
+  $('.user-info .location').replaceWith('<span class="location"></span>');
 }
 
 function updateProfile(userID)  {
