@@ -118,35 +118,29 @@
 
 -(BOOL)webView:(UIWebView *)theWebView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
   NSLog(@"webView %@", [request URL]);
-	return YES;
+  if ([[[request URL] scheme] isEqualToString:@"file"]) {
+    return YES;
+  } else {
+    return NO;
+  }
 }
+
 
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
   NSLog(@"webView failed %@", error);
 }
 
-- (void)beginInterruption;
-{
-	//_wasPlayingBeforeInterruption = self.playbackVC.playing;
-	//if(_wasPlayingBeforeInterruption)
-		//[self.playbackVC togglePlaying:nil];
+- (void)beginInterruption {
 }
 
 
-- (void)endInterruptionWithFlags:(NSUInteger)flags NS_AVAILABLE_IPHONE(4_0);
-{
-	//if(_wasPlayingBeforeInterruption && !self.playbackVC.playing && flags & AVAudioSessionInterruptionFlags_ShouldResume)
-		//[self.playbackVC togglePlaying:nil];
+- (void)endInterruptionWithFlags:(NSUInteger)flags NS_AVAILABLE_IPHONE(4_0) {
 }
 
 
 -(void)sessionDidLoginSuccessfully:(SPSession *)aSession {
-  
-
   NSLog(@"sessionDidLoginSuccessfully %@", [aSession user]);
-  
-  
 }
 
 
@@ -159,47 +153,36 @@
   NSLog(@"session: %@, message: %@", aSession, aMessage);
 }
 
--(void)sessionDidChangeMetadata:(SPSession *)aSession {
-  //SPPlaylistContainer *playlists = [[SPSession sharedSession] userPlaylists];
-  SPPlaylistContainer *playlists = [aSession userPlaylists];
 
-  NSLog(@"sessionDidChangeMetadata %@ %d", playlists, [playlists isLoaded]);
-  
+-(void)sessionDidChangeMetadata:(SPSession *)aSession {
+  SPPlaylistContainer *playlists = [aSession userPlaylists];  
   if ([playlists isLoaded]) {
     SPPlaylist *first = [[playlists playlists] objectAtIndex:1];
     if (first && [first isLoaded]) {
       SPTrack *track = [[first tracks] objectAtIndex:0];
       if (track && [track isLoaded]) {
-        NSError *err = nil;
-
-        NSLog(@"playlist!!!!!!!!!! %@ %@", first, track);
-        
+        NSError *err = nil;        
         [[SPSession sharedSession] seekPlaybackToOffset:0];
         [[SPSession sharedSession] playTrack:track error:&err];
-        NSLog(@"error??? %@", err);
       }
     }
   }
 }
 
 -(NSInteger)session:(SPSession *)aSession shouldDeliverAudioFrames:(const void *)audioFrames ofCount:(NSInteger)frameCount format:(const sp_audioformat *)audioFormat {
-  //NSLog(@"!!!! i can has audio");
-  //return frameCount;
-  
-  
   audio_fifo_t *af = &audiofifo;
   audio_fifo_data_t *afd = NULL;
   size_t s;
   
-  if (frameCount == 0)
+  if (frameCount == 0) {
     return 0; // Audio discontinuity, do nothing
+  }
   
   pthread_mutex_lock(&af->mutex);
   
   /* Buffer one second of audio */
   if (af->qlen > audioFormat->sample_rate) {
-    pthread_mutex_unlock(&af->mutex);
-    
+    pthread_mutex_unlock(&af->mutex);    
     return 0;
   }
   
