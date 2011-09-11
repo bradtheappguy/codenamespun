@@ -12,11 +12,39 @@
 #import "TouchJSON/JSON/CJSONSerializer.h"
 #include "libspotify/appkey.c"
 
+@interface NSString (ParseCategory)
+- (NSMutableDictionary *)explodeToDictionaryInnerGlue:(NSString *)innerGlue outterGlue:(NSString *)outterGlue;
+@end
+
+@implementation NSString (ParseCategory)
+
+- (NSMutableDictionary *)explodeToDictionaryInnerGlue:(NSString *)innerGlue outterGlue:(NSString *)outterGlue {
+  // Explode based on outter glue
+  NSArray *firstExplode = [self componentsSeparatedByString:outterGlue];
+  NSArray *secondExplode;
+  
+  // Explode based on inner glue
+  NSInteger count = [firstExplode count];
+  NSMutableDictionary *returnDictionary = [NSMutableDictionary dictionaryWithCapacity:count];
+  for (NSInteger i = 0; i < count; i++) {
+    secondExplode = [(NSString *)[firstExplode objectAtIndex:i] componentsSeparatedByString:innerGlue];
+    if ([secondExplode count] == 2) {
+      [returnDictionary setObject:[secondExplode objectAtIndex:1] forKey:[secondExplode objectAtIndex:0]];
+    }
+  }
+  
+  return returnDictionary;
+}
+
+@end
+
+
 
 @implementation CodenameSpunAppDelegate
 
 
 @synthesize globalPlaylists;
+@synthesize globalTracks;
 @synthesize window=_window;
 @synthesize viewController=_viewController;
 
@@ -24,11 +52,16 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   
+  [[[self viewController].subviews objectAtIndex:0] setScrollEnabled:NO];  //to stop scrolling completely
+  [[[self viewController].subviews objectAtIndex:0] setBounces:NO]; //to stop bouncing
+  [[self viewController] setScalesPageToFit:NO];
+  [[self viewController] setBackgroundColor:[UIColor clearColor]];
+  [[self viewController] setAllowsInlineMediaPlayback:YES];
+  [[self viewController] setMediaPlaybackRequiresUserAction:NO];
   
   NSURL *url = [[NSBundle mainBundle] URLForResource:@"index" withExtension:@"html" subdirectory:@"web"];
-  
   [[self viewController] loadRequest:[NSURLRequest requestWithURL:url]];
-    
+  
 	NSError *err = nil;
 
 	[[AVAudioSession sharedInstance] setDelegate:self];
@@ -39,8 +72,11 @@
 		NSLog(@"Failed to activate audio session: %@", err);
   }
 	
+  didFetchPlaylists = NO;
   
   [self setGlobalPlaylists:[NSMutableDictionary dictionaryWithCapacity:0]];
+  [self setGlobalTracks:[NSMutableDictionary dictionaryWithCapacity:0]];
+
   audio_init(&audiofifo);
   [SPSession initializeSharedSessionWithApplicationKey:[NSData dataWithBytes:&g_appkey length:g_appkey_size]
                                              userAgent:@"com.spotify.SimplePlayer"
@@ -63,10 +99,20 @@
 
 
 -(BOOL)webView:(UIWebView *)theWebView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-  //NSLog(@"webView %@", [request URL]);
+  NSLog(@"webView %@", [request URL]);
   if ([[[request URL] scheme] isEqualToString:@"file"]) {
     return YES;
   } else {
+    if ([[[request URL] host] isEqualToString:@"player"]) {
+      NSMutableDictionary *parsedQuery = [[[request URL] query] explodeToDictionaryInnerGlue:@"=" outterGlue:@"&"];
+      NSString *deplussed = [[parsedQuery objectForKey:@"track"] stringByReplacingOccurrencesOfString:@"+" withString:@" "];
+      NSString *track = [deplussed stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+      NSLog(@"parsedQuery %@", track);
+      SPTrack *trackToPlay = [globalTracks objectForKey:track];
+      NSError *err = nil;        
+      [[SPSession sharedSession] seekPlaybackToOffset:0];
+      [[SPSession sharedSession] playTrack:trackToPlay error:&err];
+    }
     return NO;
   }
 }
@@ -102,20 +148,41 @@
 
 
 -(void)addPlaylistToGlobalPlaylists:(SPPlaylist *)thePlaylist {
+  SPPlaylistContainer *playlists = [[SPSession sharedSession] userPlaylists];
+
   if ([globalPlaylists objectForKey:[thePlaylist name]]) {
   } else {
-    SPPlaylistContainer *playlists = [[SPSession sharedSession] userPlaylists];
-    [globalPlaylists setObject:thePlaylist forKey:[thePlaylist name]];
-    NSInteger g_count = [globalPlaylists count];
-    NSInteger l_count = [[playlists playlists] count] - 1;
-    if (g_count == l_count) {
-      NSError *error = NULL;
-      NSData *jsonData = [[CJSONSerializer serializer] serializeObject:[globalPlaylists allKeys] error:&error];
-      NSString *jsonPlaylists = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-      NSString *didLoadPlaylistsCallback = [NSString stringWithFormat:@"javascript:didFetchPlaylists([], %@);", jsonPlaylists];
-      NSLog(@"wtf: %@", didLoadPlaylistsCallback);
-      [self.viewController stringByEvaluatingJavaScriptFromString:didLoadPlaylistsCallback];
+    //[globalPlaylists setObject:thePlaylist forKey:[thePlaylist name]];
+    
+    NSMutableArray *tracks = [NSMutableArray arrayWithCapacity:0];
+    
+    BOOL dontSet = false;
+    for (id track in [thePlaylist tracks]) {
+      if ([track isLoaded]) {
+        [tracks addObject:[track name]];
+        [globalTracks setObject:track forKey:[track name]];
+      } else {
+        dontSet = true;
+      }
     }
+    
+    if (dontSet) {
+      NSLog(@"waiting");
+    } else {
+      [globalPlaylists setObject:tracks forKey:[thePlaylist name]];
+    }
+  }
+
+  NSInteger g_count = [globalPlaylists count];
+  NSInteger l_count = [[playlists playlists] count] - 1;
+  if (g_count == l_count && !didFetchPlaylists) {
+    NSError *error = NULL;
+    NSData *jsonData = [[CJSONSerializer serializer] serializeObject:globalPlaylists error:&error];
+    NSString *jsonPlaylists = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSString *didLoadPlaylistsCallback = [NSString stringWithFormat:@"javascript:didFetchPlaylists(%@);", jsonPlaylists];
+    NSLog(@"%@", didLoadPlaylistsCallback);
+    [self.viewController stringByEvaluatingJavaScriptFromString:didLoadPlaylistsCallback];
+    didFetchPlaylists = YES;
   }
 }
 
@@ -144,9 +211,7 @@
  if (track && [track isLoaded]) {
  
  
- //NSError *err = nil;        
- //[[SPSession sharedSession] seekPlaybackToOffset:0];
- //[[SPSession sharedSession] playTrack:track error:&err];
+
  
  
  
