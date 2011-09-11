@@ -116,16 +116,22 @@ function updateLocation(position) {
   alert(position.coords.latitude + " " + position.coords.longitude);
 }
 
-function didFetchPlaylists(spotify_playlists) {
+function didFetchPlaylists(playlists_from_spotify) {
   playlists = playlists_from_spotify;
+  var started = false;
+  $.each(playlists, function(key, meta) {
+    if (started == false) {
+      started = true;
+      populatePlayerForm(meta[0], meta[1], meta[2], meta[3]);
+    }
+  });
 }
 
-function populatePlayerForm(playlist, track) {
+function populatePlayerForm(track, artist, album, cover) {
   $("#player-form #song-title").text(track);
-  $("#player-form #song-playlist").text(playlist);
+  $("#player-form #album-cover-img").attr("src", cover);
   $("#player-form input[name='track']").val(track);
-  $("#player-form input[name='playlist']").val(playlist);
-  //$("#player-form input[type='submit']").click();
+  $("#player-form input[type='submit']").click();
 }
 
 function bridge(form) {
@@ -143,5 +149,4 @@ function activateBackBtn(killOnClick) {
 function deactivateBackBtn() {
 	$('.back-btn').removeClass('active');
 	$('.back-btn').unbind('click', decativateBackBtn);
-
 }
