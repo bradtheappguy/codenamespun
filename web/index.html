@@ -40,7 +40,7 @@
 
 
       <div class="touchyjs-header">
-		<div id="titlebar"> </div>
+		<div id="titlebar"><a href="" onclick="" class='header-back-btn'>Go back</a> </div>
         <div id="music-player">
           <form id="player-form" action="brige://player/">
             <input type="hidden" name="track" value=""/>
@@ -57,12 +57,12 @@
               </div>
             </div>
             <input type="submit" name="event" value="play"/>
+            <div id="player-controls">
+              <a class='previous-song' href="#"></a>
+              <a class='play-pause' href="#"></a>
+              <a class='next-song' href="#"></a>
+            </div>
           </form>
-		  <div id="player-controls">
-			<a class='previous-song'></a>
-		  	<a class='play-pause'></a>
-			<a class='next-song'></a>
-		  </div>
         </div>
       </div>
 
@@ -100,46 +100,106 @@
         </div>
 		<div class="touchyjs-content" id="discover-list-view">
             <div>
-				<br/><br/>
 				<div class='tab-view'>
 					<div class="tab-view-buttons">
-						<a href="#" onclick='activateTab("#tab-artists"); return false;'>Artists</a>
-						<a href="#" onclick='activateTab("#tab-albums"); return false;'>Albums</a>
-						<a href="#" onclick='activateTab("#tab-tracks"); return false;'>Tracks</a>
+						<a href="#" class='artists' onclick='activateTab("#tab-artists"); return false;'>Artists</a>
+						<a href="#" class='albums'  onclick='activateTab("#tab-albums"); return false;'>Albums</a>
+						<a href="#" class='tracks'  onclick='activateTab("#tab-tracks"); return false;'>Tracks</a>
 					</div>
 					<div id='tab-artists' class='active tab'>
 	               	 	<div class='table-view artist-list'>
 							<a href='' onclick="TouchyJS.Nav.goTo('discover-list-view-album'); return false;" class='cell'>
-								<img src="[IMG]" class="" />
-								<span class="artist-name">[ARTIST]</span>
-								
+								<img src="http://userserve-ak.last.fm/serve/252/7734455.jpg" class="album-cover" />
+								<span class="artist-name">Bob Marley</span>	
 							</a>
-							
-			                <a href="" onclick="TouchyJS.Nav.back(); return false;" class='back-btn cell'>Go back</a>
+							<a href='' onclick="TouchyJS.Nav.goTo('discover-list-view-album'); return false;" class='cell'>
+								<img src="http://t2.gstatic.com/images?q=tbn:ANd9GcR_Gq3bcBaPOPzz8Oe5wKv9edTviwBMH1xclSu54wEqQElg3ExDBQ" class="album-cover" />
+								<span class="artist-name">Stevie Wonder</span>	
+							</a>
+							<a href='' onclick="TouchyJS.Nav.goTo('discover-list-view-album'); return false;" class='cell'>
+								<img src="http://www.urbandlazar.com/images/genre/Image/RebelutionGenre.jpg" class="album-cover" />
+								<span class="artist-name">Rebelution</span>	
+							</a>
+							<a href='' onclick="TouchyJS.Nav.goTo('discover-list-view-album'); return false;" class='cell'>
+									<img src="http://clubnotes.pmpblogs.com/files/2010/02/String-cheese.jpg" class="album-cover" />
+								<span class="artist-name">String Cheese Incident</span>	
+							</a>
+							<a href='' onclick="TouchyJS.Nav.goTo('discover-list-view-album'); return false;" class='cell'>
+								<img src="http://t1.gstatic.com/images?q=tbn:ANd9GcSRo2ypmr81LROQ0B8ft77Zpf2R-P3MgO86_A_WwR9P0OYzrpETzw" class="album-cover" />
+								<span class="artist-name">Tribal Seeds</span>	
+							</a>
+							 
+			                <a href="" onclick="TouchyJS.Nav.back(); return false;" class='back-btn cell'><span>< Go back</span></a>
+			<div class='bottom-spacer'></div>
 		                </div>
 					</div>
 					<div id='tab-albums' class='tab'>
 	               	 	<div class='table-view album-list'>
 							<a  href='' onclick="TouchyJS.Nav.goTo('discover-list-view-track'); return false;" class='cell'>
-								<img src="[IMG]" class="" />
-								<span class="album-name">[ALBUM]</span>
-								<span class="artist-name">by [ARTIST]</span>
+								<img src="http://t3.gstatic.com/images?q=tbn:ANd9GcSOz7yHUgzce05ld6tLwYVLfxlEVGCrvFxvtpnyE20Elo-xPsBsdQ" class="" />
+								<span class="album-name">Legend</span>
+								<span class="artist-name">by Bob Marley</span>
 						
 							</a>
-							
-			                <a href="" onclick="TouchyJS.Nav.back(); return false;" class='back-btn cell'>Go back</a>
+							<a  href='' onclick="TouchyJS.Nav.goTo('discover-list-view-track'); return false;" class='cell'>
+								<img src="http://www.urbandlazar.com/images/genre/Image/RebelutionGenre.jpg" class="" />
+								<span class="album-name">Courage to Grow</span>
+								<span class="artist-name">by Rebelution</span>
+						
+							</a>
+							<a  href='' onclick="TouchyJS.Nav.goTo('discover-list-view-track'); return false;" class='cell'>
+								<img src="http://clubnotes.pmpblogs.com/files/2010/02/String-cheese.jpg" class="" />
+								<span class="album-name">The String Cheese Incident</span>
+								<span class="artist-name">by The String Cheese Incident</span>
+						
+							</a>
+							<a  href='' onclick="TouchyJS.Nav.goTo('discover-list-view-track'); return false;" class='cell'>
+								<img src="http://4.bp.blogspot.com/_WBF47sylDUM/SsXy6Uw_AgI/AAAAAAAAAPA/voq3VhVdnu8/s320/folder.jpg" class="" />
+								<span class="album-name">Steel Pulse</span>
+								<span class="artist-name">by African Holocaust</span>
+						
+							</a>
+							<a  href='' onclick="TouchyJS.Nav.goTo('discover-list-view-track'); return false;" class='cell'>
+								<img src="http://t1.gstatic.com/images?q=tbn:ANd9GcSRo2ypmr81LROQ0B8ft77Zpf2R-P3MgO86_A_WwR9P0OYzrpETzw" class="" />
+								<span class="album-name">Tribal Seeds</span>
+								<span class="artist-name">by Tribal Seeds</span>
+						
+							</a>
+						
+						
+			                <a href="" onclick="TouchyJS.Nav.back(); return false;" class='back-btn cell'><span>Go back</span></a>
+				 			<div class='bottom-spacer'></div>
 		                </div>
 					</div>
 					<div id='tab-tracks' class='tab'>
 	               	 	<div class='table-view track-list'>
 							<a  class='cell'>
 							
-								<span class="track-name">[TRACK]</span>
-								<span class="artist-name">[ARTIST] - [ALBUM]</span>
+								<span class="track-name">One Love</span>
+								<span class="artist-name">Bob Marley</span>
 					
 							</a>
+							<a  class='cell'>
 							
-			                <a href="" onclick="TouchyJS.Nav.back(); return false;" class='back-btn cell'>Go back</a>
+								<span class="track-name">Don't Worry</span>
+								<span class="artist-name">Bob Marley</span>
+					
+							</a>
+							<a  class='cell'>
+							
+								<span class="track-name">No Woman No Cry</span>
+								<span class="artist-name">Bob Marley</span>
+					
+							</a>
+							<a  class='cell'>
+							
+								<span class="track-name">One Good Spliff</span>
+								<span class="artist-name">Bob Marley</span>
+					
+							</a>
+							 
+			                <a href="" onclick="TouchyJS.Nav.back(); return false;" class='back-btn cell'><span>Go back</span></a>
+							<div class='bottom-spacer'></div>
 		                </div>
 					</div>
 				</div>
@@ -158,7 +218,7 @@
 						
 					</a>
 					
-	                <a href="" class='cell' onclick="TouchyJS.Nav.back(); return false;" class='back-btn cell'>Go back</a>
+	                <a href="" class='cell' onclick="TouchyJS.Nav.back(); return false;" class='back-btn cell'><span>Go back</span></a>
                 </div>
 				<div class='bottom-spacer'></div>
 				
@@ -178,7 +238,7 @@
 					<a href="" class='cell' onclick="TouchyJS.Nav.back(); return false;" class='back-btn'>Go back</a>
                 </div>
 
-                <a href="" onclick="TouchyJS.Nav.back(); return false;" class='back-btn cell'>Go back</a>
+                <a href="" onclick="TouchyJS.Nav.back(); return false;" class='back-btn cell'><span>Go back</span></a>
                 <div class='bottom-spacer'></div>
 				
               
@@ -193,7 +253,7 @@
 						<span class="artist-name">[ARTIST] - [ALBUM]</span>
 			
 					</a>
-					<a href="" class='cell' onclick="TouchyJS.Nav.back(); return false;" class='back-btn cell'>Go back</a>
+					<a href="" class='cell' onclick="TouchyJS.Nav.back(); return false;" class='back-btn cell'><span>Go back</span></a>
                 </div>
 				<div class='bottom-spacer'></div>
 				
@@ -208,15 +268,12 @@
                 <div class='avatar-img'>
                 	<img src="[AVATAR]" />
                 </div>
-				<div class='weather-img'>
-                	<img src="[WEATHER]" />
-                </div>
 				<div class='user-info'>
                 	<span class='user-name'>[USER NAME]</span>
 					<span class='location'>[LOCATION]</span>
 				</div>
 				<div class="user-badges">
-                	<div class="user-badge"><img src="" class='badge-img' />Badge Title</div>
+                	
                 </div>
 				<ul class='table-view activity-feed'>
 					<!--li>
