@@ -59,5 +59,9 @@ A.btn-back {
 	background:transparent url(images/tn-bg.png) 0 0 repeat-x;
 }
 
+#player-form input[type='submit'] {
+  display: none;
+}
+
 
 /*end our styles */

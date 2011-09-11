@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A2E69C34141C98B700CD3C53 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A2E69C33141C98B700CD3C53 /* Default.png */; };
 		FC2A0A3B141C1362006433D6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2A0A3A141C1362006433D6 /* UIKit.framework */; };
 		FC2A0A3D141C1362006433D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2A0A3C141C1362006433D6 /* Foundation.framework */; };
 		FC2A0A3F141C1362006433D6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2A0A3E141C1362006433D6 /* CoreGraphics.framework */; };
@@ -49,6 +50,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A2E69C33141C98B700CD3C53 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		FC2A0A36141C1362006433D6 /* CodenameSpun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodenameSpun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC2A0A3A141C1362006433D6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FC2A0A3C141C1362006433D6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -183,6 +185,7 @@
 		FC2A0A40141C1362006433D6 /* CodenameSpun */ = {
 			isa = PBXGroup;
 			children = (
+				A2E69C33141C98B700CD3C53 /* Default.png */,
 				FC5F24B0141C6B63008D8F05 /* TouchJSON */,
 				FC395403141C228C00E3F161 /* libspotify */,
 				FC2A0A49141C1362006433D6 /* CodenameSpunAppDelegate.h */,
@@ -340,6 +343,7 @@
 				FC2A0A45141C1362006433D6 /* InfoPlist.strings in Resources */,
 				FC2A0A4E141C1362006433D6 /* MainWindow.xib in Resources */,
 				FC3953EC141C1A9400E3F161 /* web in Resources */,
+				A2E69C34141C98B700CD3C53 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
