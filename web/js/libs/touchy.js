@@ -2539,6 +2539,12 @@ var Doat_Navigation = function(){
                     urlValue = "/" + options.id;
                 }
             }
+			/*if (options) {
+				if (options.transition) {
+					arguments['transition'] = options.transition;
+				}
+			}*/
+		
             //$.address.value($nextElement[0].id + urlValue);
             hasher.setHash($nextElement[0].id + urlValue);
         }
