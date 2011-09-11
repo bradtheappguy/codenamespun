@@ -10,6 +10,15 @@ body {
     line-height: 30px;
     padding: 10px;
 }
+.touchyjs-footer{
+    background: #1B5790;
+    color: white;
+    height: 56px;
+    line-height: 30px;
+	position:absolute;
+	bottom:0;
+	width:100%;
+}
 h1, h1 a{
     color: #ffffff !important;
     font-size: 16px;
@@ -54,6 +63,16 @@ A.btn-back {
 
 .touchyjs-content{
     background: white;
+}
+.touchyjs-custom-view{
+    background: white;
+	position:absolute;
+	opacity:1;
+	height:100%;
+	width:100%;
+	top:-100%;
+	z-index:1000;
+	left:0;
 }
 .touchyjs-content P{
     padding: 10px;

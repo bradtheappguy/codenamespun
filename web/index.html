@@ -20,7 +20,7 @@
             // TouchyJs configuration: http://labs.doat.com/touchyjs/#configuration
             var touchyjsConfig = {
                 'fixedPositioning': true, // default
-                'browserHistory': true // default
+                'browserHistory': false, // default
             };
         </script>
         
@@ -38,28 +38,166 @@
     </head>
     <body>
         <div class="touchyjs-header">
-            Header content
+            player goes here. <a href='' onclick="TouchyJS.Nav.goTo('mymusic'); return false;">Find a song</a>
         </div>
-        <div class="touchyjs-content" id="page1">
+        <div class="touchyjs-content" id="activity">
             <div>                
-                Content page 1 <br>
-                <br>
-                <a href="" onclick="TouchyJS.Nav.goTo('page2'); return false;">Go to next page</a>
-                
+                <div class='title-bar'>Activity</div>
+                <ul class='table-view activity-feed'>
+					<li>
+						<img src="[IMG]" class="" />
+						<span class="notification">[MSG]</span>
+						<a>Add</a>
+						<a>Play</a>
+					</li>
+                </ul>
                 <br><br><br><br><br><br><br>
             </div>
         </div>
    
-        <div class="touchyjs-content" id="page2">
+        <div class="touchyjs-content" id="discover">
             <div>
-                Content page 2
+                <div class='title-bar'>Discover</div>
+				<div class='block-menu'>
+					<a href="" onclick="TouchyJS.Nav.goTo('discover-list-view'); return false;">Friends</a>
+					<a href="" onclick="TouchyJS.Nav.goTo('discover-list-view'); return false;">Trending</a>
+					<a href="" onclick="TouchyJS.Nav.goTo('discover-list-view'); return false;">Nearby</a>
+					<a href="" onclick="TouchyJS.Nav.goTo('discover-list-view'); return false;">Recommend</a>
+					<a href="" onclick="TouchyJS.Nav.goTo('discover-list-view'); return false;">Weather</a>
+				</div>
                 <br>
                 <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
                 
                 <br><br><br><br><br><br><br>
             </div>
         </div>
-        
+		<div class="touchyjs-content" id="discover-list-view">
+            <div>
+				<div id='tab-view'>
+					<div id='tab-artists'>
+	               	 	<ul class='table-view artist-list'>
+							<li onclick="TouchyJS.Nav.goTo('discover-list-view-album'); return false;">
+								<img src="[IMG]" class="" />
+								<span class="artist-name">[ARTIST]</span>
+								
+							</li>
+		                </ul>
+					</div>
+					<div id='tab-albums'>
+	               	 	<ul class='table-view album-list'>
+							<li onclick="TouchyJS.Nav.goTo('discover-list-view-track'); return false;">
+								<img src="[IMG]" class="" />
+								<span class="album-name">[ALBUM]</span>
+								<span class="artist-name">by [ARTIST]</span>
+						
+							</li>
+		                </ul>
+					</div>
+					<div id='tab-tracks'>
+	               	 	<ul class='table-view track-list'>
+							<li>
+							
+								<span class="track-name">[TRACK]</span>
+								<span class="artist-name">[ARTIST] - [ALBUM]</span>
+					
+							</li>
+		                </ul>
+					</div>
+				</div>
+                <br>
+                <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
+                
+                <br><br><br><br><br><br><br>
+            </div>
+        </div>
+		<div class="touchyjs-content" id="discover-list-view-artist">
+            <div>
+				<ul class='table-view artist-list'>
+					<li onclick="TouchyJS.Nav.goTo('discover-list-view-album'); return false;">
+						<img src="[IMG]" class="" />
+						<span class="artist-name">[ARTIST]</span>
+						
+					</li>
+                </ul>
+
+                <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
+                
+                <br><br><br><br><br><br><br>
+            </div>
+        </div>
+		<div class="touchyjs-content" id="discover-list-view-album">
+            <div>
+				<ul class='table-view album-list'>
+					<li onclick="TouchyJS.Nav.goTo('discover-list-view-track'); return false;">
+						<img src="[IMG]" class="" />
+						<span class="album-name">[ALBUM]</span>
+						<span class="artist-name">by [ARTIST]</span>
+				
+					</li>
+                </ul>
+
+                <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
+                
+                <br><br><br><br><br><br><br>
+            </div>
+        </div>
+		<div class="touchyjs-content" id="discover-list-view-track">
+            <div>
+				<ul class='table-view track-list'>
+					<li>
+					
+						<span class="track-name">[TRACK]</span>
+						<span class="artist-name">[ARTIST] - [ALBUM]</span>
+			
+					</li>
+                </ul>
+
+                <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
+                
+                <br><br><br><br><br><br><br>
+            </div>
+        </div>
+		
+		<div class="touchyjs-content" id="profile">
+            <div>
+                <div class='avatar-img'>
+                	<img src="[AVATAR]" />
+                </div>
+				<div class='user-info'>
+                	<span class='user-name'>[USER NAME]</span>
+					<span class='location'>[LOCATION]</span>
+				</div>
+				<ul class='table-view activity-feed'>
+					<li>
+						<img src="[IMG]" class="" />
+						<span class="notification">[MSG]</span>
+						<a>Add</a>
+						<a>Play</a>
+					</li>
+                </ul>
+					<br>
+                <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
+                
+                <br><br><br><br><br><br><br>
+            </div>
+        </div>
+		<div class="touchyjs-content" id="mymusic">
+            <div>
+                My Music
+                <br>
+                <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
+                
+                <br><br><br><br><br><br><br>
+            </div>
+        </div>
+        <div class="touchyjs-footer">
+            <div class='tab-navigator'>
+				<a href="" onclick="TouchyJS.Nav.goTo('activity'); return false;">Activity</a>
+				<a href="" onclick="TouchyJS.Nav.goTo('discover'); return false;">Discover</a>
+				<a href="" onclick="TouchyJS.Nav.goTo('profile'); return false;">Profile</a>
+			</div>
+        </div>
+		
         <script>
             if(!isTouch) {
                 document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>');
