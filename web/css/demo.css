@@ -8,9 +8,9 @@ body {
 	
 }
 .touchyjs-header{
-    background: url(../images/player-bg.png) 0 0 no-repeat;
+    background: url(../images/player-bg.png) 0 52px no-repeat;
     color: white;
-    height: 93px;
+    height: 154px;
     line-height: 30px;
 	overflow:hidden;
 }
@@ -22,8 +22,13 @@ body {
 	bottom:0;
 	width:100%;
 	margin:0;
-	border-top:2px solid #000;
 	
+}
+
+#titlebar {
+	display:block;
+	height:52px;
+	background:url(../images/bg-header.png) 0 0 no-repeat;
 }
 
 .touchyjs-footer .tab-navigator a{
@@ -95,16 +100,80 @@ body {
 	opacity:1;
 }
 
+#music-player #player-controls {
+	display:block;
+	position:absolute;
+	top:110px;
+	left:120px;
+}
+#music-player .next-song {
+	background:url(../images/ff_btn.png) 0 0 no-repeat;
+	display:block;
+	width:39px;
+	height:39px;
+	float:left;
+	margin-top:4px;
+}
+#music-player .previous-song {
+	background:url(../images/rw_btn.png) 0 0 no-repeat;
+	display:block;
+	width:39px;
+	height:39px;
+	float:left;
+	margin-top:4px;
+}
+#music-player .play-pause{
+	background:url(../images/play_btn.png) 0 0 no-repeat;
+	display:block;
+	width:42px;
+	height:43px;
+	float:left;
+}
+#music-player #song-info {
+	position:absolute;
+	left:120px;
+	top:64px;
+	line-height:18px;
+}
+#music-player #song-title {
+	font-size:18px;
+	color:#d8d39f;
+	text-shadow: 2px 1px #333;
+	height:20px;
+	line-height:18px;
+}
+#music-player #song-playlist {
+	font-size:10px;
+	color:#c0bfbf;
+	line-height:10px;
+}
 
-
+.tab-view, .tab-view div {
+	width:100%;
+	display:block;
+}
 .table-view{
 	margin:0;
 	padding:0;
+	width:100%;
+	display:block;
+	
+}
+
+.table-view li {
+	display:block;
+	background:#fff;
+	border-top:1px solid #333;
+	padding:5px;
+	color:#333;
+	text-decoration:none;
+	width:100%;
+	display:block;
 }
 .activity-feed li {
 	margin:0;
 	padding:0;
-	background:url(../images/activity-bg.png) 0 0 no-repeat;
+	background:transparent url(../images/activity-bg.png) 0 0 no-repeat;
 	height:90px;
 	overflow:hidden;
 	position:relative;
@@ -147,7 +216,7 @@ body {
 	height:40px;
 }
 .activity-feed .notification{
-	width:300px;
+	width:190px;
 	height:700px;
 	display:block;
 	position:absolute;
@@ -156,6 +225,23 @@ body {
 	font-size:11px;
 	color:#000;
 }
+
+.block-menu a {
+	display:block;
+	background:#fff;
+	border-top:1px solid #333;
+	padding:5px;
+	color:#333;
+	text-decoration:none;
+}
+
+
+
+.block-menu a:hover {
+	background:#efefef;
+}
+
+
 
 h1, h1 a{
     color: #ffffff !important;
@@ -202,7 +288,6 @@ A.btn-back {
 .touchyjs-content{
     background: #666;
 	color:#fff;
-	padding-bottom:45px;
 }
 .touchyjs-custom-view{
     background: white;
