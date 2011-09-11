@@ -17,6 +17,7 @@ function hideFromTop(target) {
 }
 
 function postPlayedSong(name) {
+  alert('post played');
   $.getJSON('http://api.wunderground.com/api/d027b704c23bc8ed/geolookup/conditions/conditions/q/autoip.json', function(data) {
             weather = data['current_observation']['weather'];
             temp = data['current_observation']['temp_f'];
