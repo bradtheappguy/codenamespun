@@ -144,3 +144,17 @@ function populatePlayerForm(playlist, track) {
 function bridge(form) {
   window.location = form.action + $(form).serialize();
 }
+
+function activateBackBtn(killOnClick) {
+	$('.back-btn').addClass('active');
+	if (!killOnClick){
+		$('.back-btn').bind('click', decativateBackBtn);
+	}
+
+}
+
+function deactivateBackBtn() {
+	$('.back-btn').removeClass('active');
+	$('.back-btn').unbind('click', decativateBackBtn);
+
+}

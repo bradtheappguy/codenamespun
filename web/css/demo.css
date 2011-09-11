@@ -266,12 +266,17 @@ h1, h1 a{
     margin: 0;
     text-align: center;
 }
-.btn-back{
-    left: 17px;
-    top: 10px; 
-    display: none;
+.back-btn{
+    position:absolute;
+	background:#fff;
+	top:0;
+	left:0;
+	display:none;
 }
-A.btn-back {
+.back-btn.active {
+	display:block;
+}
+/*A.btn-back {
     background:#ffffff;
     color:#000000;
     text-decoration:none;
@@ -300,7 +305,13 @@ A.btn-back {
         top:5px;
         content:"";
     }
+*/
 
+.btn-back {
+	position:absolute;
+	top:0;
+	left:0;
+}
 .touchyjs-content{
     background: #666;
 	color:#fff;

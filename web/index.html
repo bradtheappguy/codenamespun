@@ -20,7 +20,7 @@
             // TouchyJs configuration: http://labs.doat.com/touchyjs/#configuration
             var touchyjsConfig = {
                 'fixedPositioning': true, // default
-                'browserHistory': false, // default
+                'browserHistory': true, // default
             };
         </script>
         
@@ -40,7 +40,7 @@
 
 
       <div class="touchyjs-header">
-		<div id="titlebar"></div>
+		<div id="titlebar"> </div>
         <div id="music-player">
           <form id="player-form" action="brige://player/">
             <input type="hidden" name="track" value=""/>
@@ -136,7 +136,7 @@
 					</div>
 				</div>
                 <br>
-                
+                <a href="" onclick="TouchyJS.Nav.back(); return false;" class='back-btn'>Go back</a>
                 
               
             </div>
@@ -151,7 +151,7 @@
 					</a>
                 </div>
 
-                <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
+                <a href="" onclick="TouchyJS.Nav.back(); return false;" class='back-btn'>Go back</a>
                 
                 
             </div>
@@ -167,7 +167,7 @@
 					</a>
                 </div>
 
-                <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
+                <a href="" onclick="TouchyJS.Nav.back(); return false;" class='back-btn'>Go back</a>
                 
               
             </div>
@@ -183,7 +183,7 @@
 					</a>
                 </div>
 
-                <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
+               
                 
               
             </div>
@@ -198,6 +198,9 @@
                 	<span class='user-name'>[USER NAME]</span>
 					<span class='location'>[LOCATION]</span>
 				</div>
+				<div class="user-bages">
+                	<div class="user-badge"><img src="" class='badge-img' />Badge Title</div>
+                </div>
 				<ul class='table-view activity-feed'>
 					<li>
 					
@@ -207,7 +210,7 @@
 					</li>
                 </ul>
 					<br>
-                <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
+                <a href="" onclick="TouchyJS.Nav.back(); return false;" class='back-btn'>Go back</a>
                 
              
             </div>
@@ -216,7 +219,7 @@
             <div>
                 My Music
                 <br>
-                <a href="" onclick="TouchyJS.Nav.back(); return false;">Go back</a>
+                <a href="" onclick="TouchyJS.Nav.back(); return false;" >Go back</a>
                 
                
             </div>
@@ -230,11 +233,11 @@
         </div>
 		
         <script>
-            if(!isTouch) {
+           // if(!isTouch) {
                 document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>');
-            } else {
+          //  } else {
                 document.write('<script src="http://developer.stg.doat.com/min/g=zepto.0.7&debug"><\/script>');
-            }
+           // }
         </script>        
         <script src="js/libs/touchy.min.js"></script>      
         <script src="js/script.js"></script>
